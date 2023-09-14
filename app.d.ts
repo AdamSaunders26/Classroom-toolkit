@@ -4,10 +4,10 @@ declare global {
     first_name: string;
     last_name: string;
     year: number;
-    class: string;
+    CTclass: string;
   }
 
-  interface Class {
+  interface CTClass {
     name: string;
     pupils: Pupil[];
   }
