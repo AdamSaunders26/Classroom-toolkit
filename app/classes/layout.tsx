@@ -8,10 +8,10 @@ export default function ClassesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const classes = [class1, class2, class3];
+  const CTclasses = [class1, class2, class3];
   return (
     <main className="grid grid-cols-5 h-full">
-      <ClassesSidebar classes={classes} />
+      <ClassesSidebar CTclasses={CTclasses} />
       {children}
     </main>
   );

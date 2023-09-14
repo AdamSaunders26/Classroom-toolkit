@@ -6,7 +6,6 @@ export default function Header() {
       <h1 className="text-2xl">Classroom Toolkit</h1>
       <nav className="flex gap-2 mx-4">
         <Link href="/classes">Classes</Link>
-
         <p>Link</p>
         <p>Link</p>
       </nav>
