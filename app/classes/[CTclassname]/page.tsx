@@ -14,7 +14,8 @@ interface Props {
 export default function CTClassPage({ params }: Props) {
   const allClasses = [class1, class2, class3]; //this will be a single get requst from API for the specific class
   const [currentCTClass, setCurrentCTClass] = useState<CTClass | null>(null);
-
+  const [currentPupil, setCurrentPupil] = useState<Pupil | null>(null);
+  console.log(currentPupil);
   useEffect(() => {
     allClasses.forEach((CTclass) => {
       CTclass.name.toLowerCase() === params.CTclassname
@@ -25,9 +26,9 @@ export default function CTClassPage({ params }: Props) {
 
   return (
     <main className="border-4 col-span-4 grid grid-cols-5">
-      <ClassList CTclass={currentCTClass} />
+      <ClassList CTclass={currentCTClass} setCurrentPupil={setCurrentPupil} />
       <section className="col-span-4 border-4 border-green-500 grid grid-rows-2">
-        <PupilDetails />
+        <PupilDetails pupil={currentPupil} />
         <ModifyClass />
       </section>
     </main>
