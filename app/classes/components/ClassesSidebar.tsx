@@ -1,20 +1,24 @@
 import Link from "next/link";
 
 interface Props {
-  CTclasses: CTClass[];
+  CTClasses: CTClass[] | null;
 }
 
-export default function CTClassesSidebar({ CTclasses }: Props) {
+export default function CTClassesSidebar({ CTClasses }: Props) {
   return (
     <aside className="flex flex-col border-4 border-orange-500 p-4">
       <h2>Your classes:</h2>
-      {CTclasses.map(({ name }) => {
-        return (
-          <section key={name}>
-            <Link href={`/classes/${name.toLowerCase()}`}>{name}</Link>
-          </section>
-        );
-      })}
+      {CTClasses ? (
+        CTClasses.map(({ name }) => {
+          return (
+            <section key={name}>
+              <Link href={`/classes/${name?.toLowerCase()}`}>{name}</Link>
+            </section>
+          );
+        })
+      ) : (
+        <section>No classes found</section>
+      )}
     </aside>
   );
 }
