@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import ClassList from "./components/ClassList";
 import ModifyClass from "./components/ModifyClass";
 import PupilDetails from "./components/PupilDetails";
@@ -13,16 +13,27 @@ interface Props {
 
 export default function CTClassPage({ params }: Props) {
   const allClasses = [class1, class2, class3]; //this will be a single get requst from API for the specific class
-  const [currentCTClass, setCurrentCTClass] = useState<CTClass | null>(null);
+  const [currentCTClass, setCurrentCTClass] = useState<CTClass>({
+    name: null,
+    pupils: null,
+  });
   const [currentPupil, setCurrentPupil] = useState<Pupil | null>(null);
-  console.log(currentPupil);
+
   useEffect(() => {
-    allClasses.forEach((CTclass) => {
-      CTclass.name.toLowerCase() === params.CTclassname
-        ? setCurrentCTClass(CTclass)
-        : null;
-    });
+    async function fetchData(
+      setState?: Dispatch<SetStateAction<CTClass | null>>
+    ) {
+      const newClass = await fetch("http://localhost:3000/api/classes");
+      const parsedClass = await newClass.json();
+
+      setCurrentCTClass((curr) => {
+        return { name: params.CTclassname, pupils: parsedClass };
+      });
+    }
+
+    fetchData();
   }, []);
+  console.log(currentCTClass);
 
   return (
     <main className="border-4 col-span-4 grid grid-cols-5">

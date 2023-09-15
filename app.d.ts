@@ -8,8 +8,8 @@ declare global {
   }
 
   interface CTClass {
-    name: string;
-    pupils: Pupil[];
+    name: string | null;
+    pupils: Pupil[] | null;
   }
 }
 

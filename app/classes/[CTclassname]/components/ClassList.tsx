@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function ClassList({ CTclass, setCurrentPupil }: Props) {
-  if (CTclass) {
+  if (CTclass?.pupils) {
     return (
       <section className="border-4 p-4 border-blue-500">
         <ul>
