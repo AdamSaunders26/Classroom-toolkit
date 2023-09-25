@@ -17,9 +17,8 @@ declare global {
 
   interface Teacher {
     id: string;
-    title: string;
-    first_name: string;
-    last_name: string;
+    title?: string;
+    name: string;
     email: string;
     createdAt: Date;
     updatedAt: Date;

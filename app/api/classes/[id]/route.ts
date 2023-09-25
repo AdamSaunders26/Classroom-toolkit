@@ -21,7 +21,7 @@ export async function GET(
     where: {
       id: fetchedClass.teacherId,
     },
-  })) as Teacher;
+  })) as unknown as Teacher;
 
   return NextResponse.json(fetchedClass);
 }

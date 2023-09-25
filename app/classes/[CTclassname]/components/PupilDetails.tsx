@@ -12,12 +12,7 @@ export default function PupilDetails({ pupil, CTClass }: Props) {
         {CTClass?.name} - Year {CTClass?.year}
       </h2>
       <div className="">
-        <p>
-          Teacher:{" "}
-          {CTClass
-            ? formatName(CTClass?.teacher.title, CTClass?.teacher.last_name)
-            : null}
-        </p>
+        <p>Teacher:</p>
         {pupil ? (
           <p>
             Name: {pupil?.first_name} {pupil?.last_name}
