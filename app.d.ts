@@ -3,14 +3,26 @@ declare global {
     id: number;
     first_name: string;
     last_name: string;
-    year: number;
     CTclass: string;
   }
 
   interface CTClass {
+    id: number;
+    name: string | null;
+    pupils: Pupil[] | null;
+    year: number;
+    teacher: Teacher;
+    teacherId: string;
+  }
+
+  interface Teacher {
+    id: string;
+    title?: string;
     name: string;
-    pupils: Pupil[];
+    email: string;
+    createdAt: Date;
+    updatedAt: Date;
+    CTClasses: CTClass[];
   }
 }
-
 export {};

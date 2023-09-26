@@ -1,4 +1,4 @@
-export const class1: CTClass = {
+export const class1 = {
   name: "Acer",
   pupils: [
     {

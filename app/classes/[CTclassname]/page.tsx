@@ -1,26 +1,29 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import ClassList from "./components/ClassList";
 import ModifyClass from "./components/ModifyClass";
 import PupilDetails from "./components/PupilDetails";
-import { class1 } from "@/app/mock data/class1";
-import { class2 } from "@/app/mock data/class2";
-import { class3 } from "@/app/mock data/class3";
+import {
+  getAllClasses,
+  getSingleClass,
+} from "@/app/(app)/fetchFunctions/getFunctions";
 
 interface Props {
   params: { CTclassname: string };
 }
 
 export default function CTClassPage({ params }: Props) {
-  const allClasses = [class1, class2, class3]; //this will be a single get requst from API for the specific class
   const [currentCTClass, setCurrentCTClass] = useState<CTClass | null>(null);
   const [currentPupil, setCurrentPupil] = useState<Pupil | null>(null);
-  console.log(currentPupil);
+  const [allClasses, setAllClasses] = useState<CTClass[] | null>(null);
+
   useEffect(() => {
-    allClasses.forEach((CTclass) => {
-      CTclass.name.toLowerCase() === params.CTclassname
-        ? setCurrentCTClass(CTclass)
-        : null;
+    getAllClasses(setAllClasses).then((CTClasses) => {
+      CTClasses.forEach((CTClass) => {
+        CTClass.name?.toLowerCase() === params.CTclassname
+          ? getSingleClass(params.CTclassname, setCurrentCTClass, CTClass.id)
+          : null;
+      });
     });
   }, []);
 
@@ -28,7 +31,7 @@ export default function CTClassPage({ params }: Props) {
     <main className="border-4 col-span-4 grid grid-cols-5">
       <ClassList CTclass={currentCTClass} setCurrentPupil={setCurrentPupil} />
       <section className="col-span-4 border-4 border-green-500 grid grid-rows-2">
-        <PupilDetails pupil={currentPupil} />
+        <PupilDetails pupil={currentPupil} CTClass={currentCTClass} />
         <ModifyClass />
       </section>
     </main>
