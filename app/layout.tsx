@@ -1,8 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Sarabun } from "next/font/google";
-import Header from "./Header";
-import NextAuthProvider from "./NextAuthProvider";
+import Header from "./(app)/Header";
+import NextAuthProvider from "./(app)/NextAuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const sarabun = Sarabun({ subsets: ["latin"], weight: "500" });

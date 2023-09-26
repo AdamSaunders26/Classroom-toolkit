@@ -15,7 +15,7 @@ export default function ClassesLayout({
   const [allClasses, setAllClasses] = useState<CTClass[] | null>(null);
 
   useEffect(() => {
-    getAllClasses(setAllClasses);
+    // getAllClasses(setAllClasses);
   }, []);
 
   return (
