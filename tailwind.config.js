@@ -16,8 +16,11 @@ module.exports = {
       },
     },
     extend: {
+      gridTemplateRows: {
+        splash: "25% 1fr 25%",
+      },
       colors: {
-        CTBlue: {
+        ctblue: {
           DEFAULT: "#3e8fa9",
           100: "#0c1c22",
           200: "#193843",
@@ -28,6 +31,18 @@ module.exports = {
           700: "#84bed2",
           800: "#add4e1",
           900: "#d6e9f0",
+        },
+        ctyellow: {
+          DEFAULT: "#ffbe00",
+          100: "#332600",
+          200: "#664d00",
+          300: "#997300",
+          400: "#cc9900",
+          500: "#ffbe00",
+          600: "#ffcc33",
+          700: "#ffd966",
+          800: "#ffe699",
+          900: "#fff2cc",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

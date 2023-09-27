@@ -1,11 +1,27 @@
+"use client";
 import Link from "next/link";
+import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
+
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
+import HeaderNavItem from "./HeaderNavItem";
 
 export default function HeaderNav() {
   return (
-    <nav className="flex text-xl gap-8">
-      <Link href="/classes">Classes</Link>
-      <p>Link 2</p>
-      <p>Link 3</p>
-    </nav>
+    <NavigationMenu className=" ">
+      <NavigationMenuList className="gap-4">
+        <HeaderNavItem href="/classes" text="Classes" />
+        <HeaderNavItem href="/" text="Link 1" />
+        <HeaderNavItem href="/" text="Link 2" />
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 }
