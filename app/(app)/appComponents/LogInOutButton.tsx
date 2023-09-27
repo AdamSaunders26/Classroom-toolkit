@@ -1,19 +1,26 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-export default function LogInOutButton() {
-  const { data: session } = useSession();
-  const buttonClass = "border-2 w-fit";
+interface Props {
+  header: boolean;
+}
 
+export default function LogInOutButton({ header }: Props) {
+  const { data: session } = useSession();
+
+  const buttonClass = header
+    ? "bg-ctblue hover:bg-ctblue-300"
+    : "border-ctyellow border-2 rounded-md bg-white text-black hover:bg-ctyellow";
   return (
-    <button
+    <Button
       className={buttonClass}
       onClick={() => {
         session ? signOut() : signIn();
       }}
     >
       Sign {session ? "out" : "in"}
-    </button>
+    </Button>
   );
 }
