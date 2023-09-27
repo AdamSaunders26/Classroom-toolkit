@@ -10,7 +10,7 @@ declare global {
     id: number;
     name: string | null;
     pupils: Pupil[] | null;
-    year: number;
+    yearGroup: number;
     teacher: Teacher;
     teacherId: string;
   }

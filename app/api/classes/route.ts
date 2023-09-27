@@ -6,3 +6,30 @@ export async function GET(request: Request) {
 
   return NextResponse.json(fetchedClass);
 }
+
+export async function POST(request: Request) {
+  const { name, yearGroup, email } = await request.json();
+
+  try {
+    const newClass = await prisma.user.update({
+      where: {
+        email,
+      },
+      data: {
+        CTClasses: {
+          create: {
+            name,
+            yearGroup: Number(yearGroup),
+          },
+        },
+      },
+      include: {
+        CTClasses: true,
+      },
+    });
+
+    return NextResponse.json(newClass);
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -17,15 +17,15 @@ export default function CTClassPage({ params }: Props) {
   const [currentPupil, setCurrentPupil] = useState<Pupil | null>(null);
   const [allClasses, setAllClasses] = useState<CTClass[] | null>(null);
 
-  useEffect(() => {
-    getAllClasses(setAllClasses).then((CTClasses) => {
-      CTClasses.forEach((CTClass) => {
-        CTClass.name?.toLowerCase() === params.CTclassname
-          ? getSingleClass(params.CTclassname, setCurrentCTClass, CTClass.id)
-          : null;
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   getAllClasses(setAllClasses).then((CTClasses) => {
+  //     CTClasses.forEach((CTClass) => {
+  //       CTClass.name?.toLowerCase() === params.CTclassname
+  //         ? getSingleClass(params.CTclassname, setCurrentCTClass, CTClass.id)
+  //         : null;
+  //     });
+  //   });
+  // }, []);
 
   return (
     <main className="border-4 col-span-4 grid grid-cols-5">
