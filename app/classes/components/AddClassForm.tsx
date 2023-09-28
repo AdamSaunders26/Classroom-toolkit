@@ -23,13 +23,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import YearGroupSelect from "./YearGroupSelect";
 
 const formSchema = z.object({
   name: z.string().min(1, "Class name is required").max(20, {
     message: "Class name must be less than 20 characters",
   }),
-  yearGroup: z.number().min(1, "Please select a year group"),
+  yearGroup: z.union([
+    z.string().regex(/^(?:[0-9]|1[0-3])$/),
+    z.literal("EYFS"),
+    z.literal("Other"),
+  ]),
 });
 interface Props {
   setAllClasses: Dispatch<SetStateAction<CTClass[] | null>>;
@@ -41,7 +44,7 @@ export default function AddClassForm({ setAllClasses }: Props) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      yearGroup: 0,
+      yearGroup: "",
     },
   });
 
@@ -54,7 +57,7 @@ export default function AddClassForm({ setAllClasses }: Props) {
 
     const classList = await classToPost.json();
     setAllClasses(classList.CTClasses);
-    form.reset({ name: "", yearGroup: 0 });
+    form.reset({ name: "", yearGroup: "" });
   }
 
   return (
@@ -67,7 +70,7 @@ export default function AddClassForm({ setAllClasses }: Props) {
             <FormItem>
               <FormLabel>Class name</FormLabel>
               <FormControl>
-                <Input placeholder="Kestrel Class" {...field} />
+                <Input placeholder="" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -84,13 +87,13 @@ export default function AddClassForm({ setAllClasses }: Props) {
                 defaultValue={field?.value}
               >
                 <FormControl>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Year Group" />
+                  <SelectTrigger className="">
+                    <SelectValue placeholder="Choose..." />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value={0}>EYFS</SelectItem>
-                  <SelectItem value={1}>1</SelectItem>
+                  <SelectItem value="EYFS">EYFS</SelectItem>
+                  <SelectItem value="1">1</SelectItem>
                   <SelectItem value="2">2</SelectItem>
                   <SelectItem value="3">3</SelectItem>
                   <SelectItem value="4">4</SelectItem>

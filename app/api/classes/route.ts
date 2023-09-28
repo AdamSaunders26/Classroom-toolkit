@@ -19,7 +19,7 @@ export async function POST(request: Request) {
         CTClasses: {
           create: {
             name,
-            yearGroup: Number(yearGroup),
+            yearGroup: yearGroup,
           },
         },
       },
