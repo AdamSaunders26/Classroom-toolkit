@@ -16,6 +16,5 @@ export async function GET(
       teacherId: teacher.id,
     },
   });
-  console.log(classes);
   return NextResponse.json(classes);
 }

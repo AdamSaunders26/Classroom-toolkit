@@ -35,7 +35,6 @@ export default function CTClassesSidebar() {
         )}
       </section>
       <AddClassForm setAllClasses={setAllClasses} />
-      {/* <AddClassButton /> */}
     </aside>
   );
 }
