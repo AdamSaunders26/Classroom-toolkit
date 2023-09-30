@@ -23,10 +23,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import YearGroupSelect from "./YearGroupSelect";
 
 const formSchema = z.object({
-  name: z.string().min(1, "Class name is required").max(20, {
-    message: "Class name must be less than 20 characters",
+  name: z.string().min(1, "Required").max(20, {
+    message: "Too long",
   }),
   yearGroup: z.union([
     z.string().regex(/^(?:[0-9]|1[0-3])$/),
@@ -62,57 +63,34 @@ export default function AddClassForm({ setAllClasses }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(submitHandler)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit(submitHandler)}
+        className="space-y-4 flex flex-col "
+      >
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Class name</FormLabel>
+              <div className="flex justify-between items-center">
+                <FormLabel className="text-white">Class name</FormLabel>
+                <FormMessage className="text-ctyellow" />
+              </div>
               <FormControl>
                 <Input placeholder="" {...field} />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="yearGroup"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Year group</FormLabel>
-              <Select
-                onValueChange={field?.onChange}
-                defaultValue={field?.value}
-              >
-                <FormControl>
-                  <SelectTrigger className="">
-                    <SelectValue placeholder="Choose..." />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="EYFS">EYFS</SelectItem>
-                  <SelectItem value="1">1</SelectItem>
-                  <SelectItem value="2">2</SelectItem>
-                  <SelectItem value="3">3</SelectItem>
-                  <SelectItem value="4">4</SelectItem>
-                  <SelectItem value="5">5</SelectItem>
-                  <SelectItem value="6">6</SelectItem>
-                  <SelectItem value="7">7</SelectItem>
-                  <SelectItem value="8">8</SelectItem>
-                  <SelectItem value="9">9</SelectItem>
-                  <SelectItem value="10">10</SelectItem>
-                  <SelectItem value="11">11</SelectItem>
-                  <SelectItem value="12">12</SelectItem>
-                  <SelectItem value="13">13</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Create new class</Button>
+
+        <YearGroupSelect form={form} />
+        <Button
+          className="border-ctyellow border-2 mt-4"
+          variant="outline"
+          type="submit"
+        >
+          Create new class
+        </Button>
       </form>
     </Form>
   );

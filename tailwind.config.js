@@ -44,6 +44,18 @@ module.exports = {
           800: "#ffe699",
           900: "#fff2cc",
         },
+        ctred: {
+          DEFAULT: "#ef767a",
+          100: "#400709",
+          200: "#800f13",
+          300: "#c0161c",
+          400: "#e7363c",
+          500: "#ef767a",
+          600: "#f29195",
+          700: "#f5adaf",
+          800: "#f9c8ca",
+          900: "#fce4e4",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -58,7 +70,7 @@ module.exports = {
           foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
+          DEFAULT: "#e7363c",
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {

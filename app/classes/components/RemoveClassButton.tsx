@@ -3,5 +3,9 @@ import { useSession } from "next-auth/react";
 
 export default function RemoveClassButton() {
   const { data: session } = useSession();
-  return <Button className="">Add Class</Button>;
+  return (
+    <Button variant="destructive" className="text-black">
+      Remove Class
+    </Button>
+  );
 }

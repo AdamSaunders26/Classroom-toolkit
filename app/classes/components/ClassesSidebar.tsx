@@ -4,6 +4,7 @@ import AddClassForm from "./AddClassForm";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { getAllClasses } from "@/app/(app)/fetchFunctions/getFunctions";
+import RemoveClassButton from "./RemoveClassButton";
 
 interface Props {
   CTClasses: CTClass[] | null;
@@ -19,22 +20,31 @@ export default function CTClassesSidebar() {
   }, [session?.user]);
 
   return (
-    <aside className="flex flex-col border-4 border-orange-500 p-4 justify-between">
-      <section className="flex flex-col">
+    <aside className="flex flex-col   bg-ctblue p-2 justify-between ">
+      <section className=" flex flex-col max-h-[50vh] ">
         <h2>Your classes:</h2>
-        {allClasses ? (
-          allClasses.map(({ id, name }) => {
-            return (
-              <Link key={id} href={`/classes/${id}`}>
-                {name}
-              </Link>
-            );
-          })
-        ) : (
-          <section>No classes found</section>
-        )}
+        <div className="flex flex-col  overflow-y-scroll items-center ">
+          {allClasses ? (
+            allClasses.map(({ id, name }) => {
+              return (
+                <Link
+                  className="bg-ctyellow m-2 rounded-md  w-full p-2"
+                  key={id}
+                  href={`/classes/${id}`}
+                >
+                  {name}
+                </Link>
+              );
+            })
+          ) : (
+            <section>No classes found</section>
+          )}
+        </div>
       </section>
-      <AddClassForm setAllClasses={setAllClasses} />
+      <div className="flex flex-col gap-2">
+        <AddClassForm setAllClasses={setAllClasses} />
+        <RemoveClassButton />
+      </div>
     </aside>
   );
 }
