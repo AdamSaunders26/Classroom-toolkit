@@ -25,7 +25,7 @@ export default function CTClassesSidebar() {
   return (
     <aside className="flex flex-col   bg-ctblue p-2 justify-between ">
       <section className=" flex flex-col max-h-[50vh] ">
-        <h2 className="text-3xl px-2 text-ctyellow">Classes:</h2>
+        <h2 className="text-3xl px-2 text-ctyellow mb-2">Classes:</h2>
         <ClassesList
           allClasses={allClasses}
           setCurrentClass={setCurrentClass}
@@ -33,7 +33,10 @@ export default function CTClassesSidebar() {
       </section>
       <div className="flex flex-col gap-2">
         <AddClassForm setAllClasses={setAllClasses} />
-        <RemoveClassButton currentClass={currentClass} />
+        <RemoveClassButton
+          currentClass={currentClass}
+          setAllClasses={setAllClasses}
+        />
       </div>
     </aside>
   );

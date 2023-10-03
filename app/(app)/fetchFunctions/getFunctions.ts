@@ -21,3 +21,14 @@ export async function getAllClasses(
   setState(parsedAllClasses);
   return parsedAllClasses;
 }
+
+export async function deleteClass(classId: number) {
+  const deleteRoute = await fetch(
+    `http://localhost:3000/api/classes/${classId}`,
+    { method: "DELETE" }
+  );
+  // deleteRoute.json().then((o) => {
+  //   console.log(o);
+  // });
+  return deleteRoute.json();
+}

@@ -25,3 +25,16 @@ export async function GET(
 
   return NextResponse.json(fetchedClass);
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: number } }
+) {
+  const deletedClass = await prisma.cTClass.delete({
+    where: {
+      id: Number(params.id),
+    },
+  });
+  console.log(deletedClass);
+  return NextResponse.json(deletedClass);
+}

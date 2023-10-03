@@ -11,12 +11,10 @@ export default function ClassNameCard({ CTClass, setCurrentClass }: Props) {
   const { CTclassId } = useParams();
 
   const { id, name, yearGroup } = CTClass;
-  let linkClass =
-    " m-2 rounded-md text-black  border-2 border-ctyellow-300  w-full  p-2";
+  let linkClass = " m-2 rounded-md text-black    w-full  p-2";
   CTclassId === id.toString()
-    ? (linkClass += " bg-white border-ctyellow hover:bg-white shadow-xl")
-    : (linkClass +=
-        " bg-ctyellow border-ctyellow-300 hover:bg-ctyellow-400 shadow-md");
+    ? (linkClass += " bg-white  hover:bg-white shadow-xl")
+    : (linkClass += " bg-ctyellow  hover:bg-ctyellow-400 shadow-md");
 
   return (
     <Button
@@ -32,7 +30,7 @@ export default function ClassNameCard({ CTClass, setCurrentClass }: Props) {
         href={`/classes/${id}`}
       >
         <div className="">{name}</div>
-        <div className="text-neutral-600">{yearGroup}</div>
+        <div className="text-neutral-700">{yearGroup}</div>
       </Link>
     </Button>
   );
