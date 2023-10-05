@@ -16,13 +16,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { Dispatch, SetStateAction } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import YearGroupSelect from "./YearGroupSelect";
 
 const formSchema = z.object({
@@ -40,13 +33,13 @@ interface Props {
 }
 export default function AddClassForm({ setAllClasses }: Props) {
   const { data: session } = useSession();
-
+  const defaultValues = {
+    name: "",
+    yearGroup: "",
+  };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      yearGroup: "",
-    },
+    defaultValues,
   });
 
   async function submitHandler(values: z.infer<typeof formSchema>) {
@@ -58,7 +51,8 @@ export default function AddClassForm({ setAllClasses }: Props) {
 
     const classList = await classToPost.json();
     setAllClasses(classList.CTClasses);
-    form.reset({ name: "", yearGroup: "" });
+    // form.reset({ name: "", yearGroup: "Choose...." });
+    form.reset(defaultValues);
   }
 
   return (

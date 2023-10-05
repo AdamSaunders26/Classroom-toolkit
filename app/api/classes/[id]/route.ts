@@ -35,6 +35,5 @@ export async function DELETE(
       id: Number(params.id),
     },
   });
-  console.log(deletedClass);
   return NextResponse.json(deletedClass);
 }

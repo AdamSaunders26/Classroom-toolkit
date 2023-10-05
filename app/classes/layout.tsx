@@ -5,7 +5,7 @@ import { class1 } from "@/app/mock data/class1";
 import { class2 } from "@/app/mock data/class2";
 import { class3 } from "@/app/mock data/class3";
 import { useEffect, useState } from "react";
-import { getAllClasses } from "../(app)/fetchFunctions/getFunctions";
+import { getAllClasses } from "../(app)/fetchFunctions/fetchFunctions";
 import { useSession } from "next-auth/react";
 
 export default function ClassesLayout({

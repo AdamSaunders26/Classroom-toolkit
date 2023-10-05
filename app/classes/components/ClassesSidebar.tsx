@@ -3,7 +3,7 @@ import AddClassButton from "./AddClassButton";
 import AddClassForm from "./AddClassForm";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { getAllClasses } from "@/app/(app)/fetchFunctions/getFunctions";
+import { getAllClasses } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import RemoveClassButton from "./RemoveClassButton";
 import ClassNameCard from "./ClassNameCard";
 import ClassesList from "./ClassesList";

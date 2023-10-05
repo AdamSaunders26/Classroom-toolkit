@@ -38,7 +38,7 @@ export default function YearGroupSelect({ form }: Props) {
             <FormLabel className="text-white">Year group</FormLabel>
             <FormMessage className="text-ctyellow" />
           </div>
-          <Select onValueChange={field?.onChange} defaultValue={field?.value}>
+          <Select onValueChange={field?.onChange} value={field?.value}>
             <FormControl>
               <SelectTrigger className="">
                 <SelectValue placeholder="Choose..." />

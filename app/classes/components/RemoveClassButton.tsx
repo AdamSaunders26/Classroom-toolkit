@@ -1,4 +1,4 @@
-import { deleteClass } from "@/app/(app)/fetchFunctions/getFunctions";
+import { deleteClass } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 
@@ -12,27 +12,29 @@ export default function RemoveClassButton({
   setAllClasses,
 }: Props) {
   const { data: session } = useSession();
+
+  function deleteCurrentClass() {
+    if (currentClass) {
+      deleteClass(currentClass?.id).then((deletedClass: CTClass) => {
+        setAllClasses((curr) => {
+          if (curr) {
+            const updatedClassList = curr?.filter((CTclass) => {
+              return CTclass.id !== deletedClass.id;
+            });
+
+            return updatedClassList;
+          } else {
+            return null;
+          }
+        });
+      });
+    }
+  }
   return (
     <Button
       variant="destructive"
       className="text-black"
-      onClick={() => {
-        if (currentClass) {
-          deleteClass(currentClass?.id).then((deletedClassId) => {
-            setAllClasses((curr) => {
-              console.log(curr);
-              if (curr) {
-                const updatedClassList = curr?.filter((CTclass) => {
-                  return CTclass.id !== deletedClassId;
-                });
-                return updatedClassList;
-              } else {
-                return null;
-              }
-            });
-          });
-        }
-      }}
+      onClick={deleteCurrentClass}
     >
       Remove Class
     </Button>

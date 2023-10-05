@@ -6,7 +6,7 @@ import PupilDetails from "./components/PupilDetails";
 import {
   getAllClasses,
   getSingleClass,
-} from "@/app/(app)/fetchFunctions/getFunctions";
+} from "@/app/(app)/fetchFunctions/fetchFunctions";
 
 interface Props {
   params: { CTclassname: string };
