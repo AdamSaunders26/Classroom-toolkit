@@ -37,3 +37,31 @@ export async function DELETE(
   });
   return NextResponse.json(deletedClass);
 }
+
+export async function POST(
+  request: Request,
+  { params }: { params: { id: number } }
+) {
+  const { first_name, last_name } = await request.json();
+
+  try {
+    const postPupil = await prisma.cTClass.update({
+      where: { id: Number(params.id) },
+      data: {
+        pupils: {
+          create: {
+            first_name,
+            last_name,
+          },
+        },
+      },
+      include: {
+        pupils: true,
+      },
+    });
+
+    return NextResponse.json(postPupil);
+  } catch (error) {
+    console.log(error);
+  }
+}

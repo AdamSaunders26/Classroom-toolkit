@@ -12,7 +12,6 @@ export default function PupilDetails({ pupil, CTClass }: Props) {
         {CTClass?.name} - Year {CTClass?.yearGroup}
       </h2>
       <div className="">
-        <p>Teacher:</p>
         {pupil ? (
           <p>
             Name: {pupil?.first_name} {pupil?.last_name}
