@@ -9,7 +9,7 @@ export default function PupilDetails({ pupil, CTClass }: Props) {
   return (
     <section className="border-4 border-pink-500 p-4">
       <h2>
-        {CTClass?.name} - Year {CTClass?.year}
+        {CTClass?.name} - Year {CTClass?.yearGroup}
       </h2>
       <div className="">
         <p>Teacher:</p>

@@ -12,6 +12,7 @@ export default function ClassesList({ allClasses, setCurrentClass }) {
         allClasses.map((CTClass: CTClass) => {
           return (
             <ClassNameCard
+              key={CTClass.id}
               CTClass={CTClass}
               setCurrentClass={setCurrentClass}
             />
