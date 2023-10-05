@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CTLogo from "../icon.svg";
+import CTLogo from "../../icon.svg";
 import Image from "next/image";
 
 interface Props {

@@ -75,7 +75,7 @@ model CTClass {
   id        Int     @id @default(autoincrement())
   name      String
   pupils    Pupil[]
-  year      Int
+  yearGroup String
   teacher   User    @relation(fields: [teacherId], references: [id])
   teacherId String
 }

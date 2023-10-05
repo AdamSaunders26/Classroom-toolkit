@@ -12,11 +12,21 @@ export async function getSingleClass(
 }
 
 export async function getAllClasses(
+  email: string,
   setState: Dispatch<SetStateAction<CTClass[] | null>>
 ) {
-  const allClasses = await fetch("http://localhost:3000/api/classes");
+  const allClasses = await fetch(`http://localhost:3000/api/teachers/${email}`);
   const parsedAllClasses = (await allClasses.json()) as CTClass[];
 
   setState(parsedAllClasses);
   return parsedAllClasses;
+}
+
+export async function deleteClass(classId: number) {
+  const deleteRoute = await fetch(
+    `http://localhost:3000/api/classes/${classId}`,
+    { method: "DELETE" }
+  );
+
+  return deleteRoute.json();
 }

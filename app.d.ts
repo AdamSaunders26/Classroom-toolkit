@@ -8,9 +8,9 @@ declare global {
 
   interface CTClass {
     id: number;
-    name: string | null;
-    pupils: Pupil[] | null;
-    year: number;
+    name: string;
+    pupils: Pupil[];
+    yearGroup: string;
     teacher: Teacher;
     teacherId: string;
   }
