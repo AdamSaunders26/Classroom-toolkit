@@ -5,25 +5,27 @@ export async function GET(
   request: Request,
   { params }: { params: { id: number } }
 ) {
-  const fetchedClass = (await prisma.cTClass.findUnique({
-    where: {
-      id: Number(params.id),
-    },
-  })) as CTClass;
+  try {
+    const fetchedClass = (await prisma.cTClass.findUnique({
+      where: {
+        id: Number(params.id),
+      },
+    })) as CTClass;
+    fetchedClass.pupils = (await prisma.pupil.findMany({
+      where: {
+        CTClassId: Number(params.id),
+      },
+    })) as unknown as Pupil[];
+    fetchedClass.teacher = (await prisma.user.findUnique({
+      where: {
+        id: fetchedClass.teacherId,
+      },
+    })) as unknown as Teacher;
 
-  fetchedClass.pupils = (await prisma.pupil.findMany({
-    where: {
-      CTClassId: Number(params.id),
-    },
-  })) as unknown as Pupil[];
-
-  fetchedClass.teacher = (await prisma.user.findUnique({
-    where: {
-      id: fetchedClass.teacherId,
-    },
-  })) as unknown as Teacher;
-
-  return NextResponse.json(fetchedClass);
+    return NextResponse.json(fetchedClass);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function DELETE(
@@ -42,7 +44,7 @@ export async function POST(
   request: Request,
   { params }: { params: { id: number } }
 ) {
-  const { first_name, last_name } = await request.json();
+  const { first_name, last_name_initials } = await request.json();
 
   try {
     const postPupil = await prisma.cTClass.update({
@@ -51,7 +53,7 @@ export async function POST(
         pupils: {
           create: {
             first_name,
-            last_name,
+            last_name_initials,
           },
         },
       },

@@ -9,7 +9,7 @@ interface Props {
 export default function ClassList({ CTclass, setCurrentPupil }: Props) {
   if (CTclass?.pupils) {
     return (
-      <section className="border-4 p-4 border-blue-500">
+      <section className=" p-4 ">
         <ul>
           <h2>Name:</h2>
           {CTclass.pupils.map((pupil) => (
@@ -18,7 +18,7 @@ export default function ClassList({ CTclass, setCurrentPupil }: Props) {
               onClick={() => {
                 setCurrentPupil(pupil);
               }}
-            >{`${pupil.first_name} ${pupil.last_name}`}</li>
+            >{`${pupil.first_name} ${pupil.last_name_initials}`}</li>
           ))}
         </ul>
       </section>

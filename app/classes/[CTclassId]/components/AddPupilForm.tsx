@@ -54,7 +54,7 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
       first_name,
       last_name_initials
     );
-    console.log(updatedClassList);
+
     setCurrentClass(updatedClassList);
     form.reset(defaultValues);
   }
