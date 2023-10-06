@@ -60,7 +60,7 @@ CREATE TABLE "CTClass" (
 CREATE TABLE "Pupil" (
     "id" SERIAL NOT NULL,
     "first_name" TEXT NOT NULL,
-    "last_name" TEXT NOT NULL,
+    "last_name_initials" TEXT NOT NULL,
     "CTClassId" INTEGER NOT NULL,
 
     CONSTRAINT "Pupil_pkey" PRIMARY KEY ("id")

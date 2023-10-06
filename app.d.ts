@@ -2,8 +2,9 @@ declare global {
   interface Pupil {
     id: number;
     first_name: string;
-    last_name: string;
-    CTclass: string;
+    last_name_initials?: string;
+    CTClass: CTClass;
+    CTClassId: number;
   }
 
   interface CTClass {

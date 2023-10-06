@@ -83,7 +83,7 @@ model CTClass {
 model Pupil {
   id         Int     @id @default(autoincrement())
   first_name String
-  last_name  String
+  last_name_initials  String?
    CTClass    CTClass @relation(fields: [CTClassId], references: [id])
   CTClassId  Int
  

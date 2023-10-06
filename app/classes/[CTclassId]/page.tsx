@@ -9,30 +9,35 @@ import {
 } from "@/app/(app)/fetchFunctions/fetchFunctions";
 
 interface Props {
-  params: { CTclassname: string };
+  params: { CTclassId: number };
 }
 
 export default function CTClassPage({ params }: Props) {
-  const [currentCTClass, setCurrentCTClass] = useState<CTClass | null>(null);
+  const [currentClass, setCurrentClass] = useState<CTClass | null>(null);
   const [currentPupil, setCurrentPupil] = useState<Pupil | null>(null);
-  const [allClasses, setAllClasses] = useState<CTClass[] | null>(null);
+  // const [currentPupilList, setCurrentPupilList] = useState<Pupil[] | null>(
+  //   null
+  // );
+  // const [allClasses, setAllClasses] = useState<CTClass[] | null>(null);
 
-  // useEffect(() => {
-  //   getAllClasses(setAllClasses).then((CTClasses) => {
-  //     CTClasses.forEach((CTClass) => {
-  //       CTClass.name?.toLowerCase() === params.CTclassname
-  //         ? getSingleClass(params.CTclassname, setCurrentCTClass, CTClass.id)
-  //         : null;
-  //     });
-  //   });
-  // }, []);
+  useEffect(() => {
+    getSingleClass(params.CTclassId, setCurrentClass);
+  }, [params.CTclassId]);
 
   return (
-    <main className="border-4 col-span-4 grid grid-cols-5">
-      <ClassList CTclass={currentCTClass} setCurrentPupil={setCurrentPupil} />
-      <section className="col-span-4 border-4 border-green-500 grid grid-rows-2">
-        <PupilDetails pupil={currentPupil} CTClass={currentCTClass} />
-        <ModifyClass />
+    <main className=" col-span-4 grid grid-cols-5">
+      <ClassList
+        CTclass={currentClass}
+        setCurrentPupil={setCurrentPupil}
+        currentPupil={currentPupil}
+      />
+      <section className="col-span-4  grid grid-rows-2">
+        <PupilDetails pupil={currentPupil} CTClass={currentClass} />
+        <ModifyClass
+          CTClassId={params.CTclassId}
+          setCurrentClass={setCurrentClass}
+          currentPupil={currentPupil}
+        />
       </section>
     </main>
   );

@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { Dispatch, SetStateAction } from "react";
 import YearGroupSelect from "./YearGroupSelect";
+import { postClass } from "@/app/(app)/fetchFunctions/fetchFunctions";
 
 const formSchema = z.object({
   name: z.string().min(1, "Required").max(20, {
@@ -44,15 +45,16 @@ export default function AddClassForm({ setAllClasses }: Props) {
 
   async function submitHandler(values: z.infer<typeof formSchema>) {
     const { name, yearGroup } = values;
-    const classToPost = await fetch("http://localhost:3000/api/classes", {
-      method: "POST",
-      body: JSON.stringify({ name, yearGroup, email: session?.user?.email }),
-    });
+    if (session?.user?.email) {
+      const updatedClassList = await postClass(
+        name,
+        yearGroup,
+        session?.user?.email
+      );
 
-    const classList = await classToPost.json();
-    setAllClasses(classList.CTClasses);
-    // form.reset({ name: "", yearGroup: "Choose...." });
-    form.reset(defaultValues);
+      setAllClasses(updatedClassList);
+      form.reset(defaultValues);
+    }
   }
 
   return (
