@@ -5,7 +5,7 @@ import RemovePupilButton from "./RemovePupilButton";
 interface Props {
   setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
   CTClassId: number;
-  currentPupil: Pupil;
+  currentPupil: Pupil | null;
 }
 
 export default function ModifyClass({

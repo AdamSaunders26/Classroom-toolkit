@@ -22,7 +22,7 @@ export default function CTClassPage({ params }: Props) {
 
   useEffect(() => {
     getSingleClass(params.CTclassId, setCurrentClass);
-  }, []);
+  }, [params.CTclassId]);
 
   return (
     <main className=" col-span-4 grid grid-cols-5">

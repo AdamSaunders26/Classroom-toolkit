@@ -23,6 +23,7 @@ export default function ClassList({
             {CTclass.pupils.map((pupil, index) => {
               return (
                 <PupilListItem
+                  key={pupil.id}
                   pupil={pupil}
                   setCurrentPupil={setCurrentPupil}
                   currentPupil={currentPupil}
