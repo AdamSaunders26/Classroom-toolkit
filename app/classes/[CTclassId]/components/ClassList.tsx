@@ -1,25 +1,35 @@
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
+import PupilListItem from "./PupilListItem";
 
 interface Props {
   CTclass: CTClass | null;
   setCurrentPupil: Dispatch<SetStateAction<Pupil | null>>;
+  currentPupil: Pupil | null;
 }
 
-export default function ClassList({ CTclass, setCurrentPupil }: Props) {
+export default function ClassList({
+  CTclass,
+  setCurrentPupil,
+  currentPupil,
+}: Props) {
   if (CTclass?.pupils) {
     return (
-      <section className=" p-4 ">
+      <section className=" p-2 px-4 flex flex-col ">
         <ul>
-          <h2>Name:</h2>
-          {CTclass.pupils.map((pupil) => (
-            <li
-              key={pupil.id}
-              onClick={() => {
-                setCurrentPupil(pupil);
-              }}
-            >{`${pupil.first_name} ${pupil.last_name_initials}`}</li>
-          ))}
+          <h2 className="text-2xl ">Name:</h2>
+          <section className="overflow-auto max-h-[80vh] mt-4 scrollbar-thin scrollbar-thumb-ctblue scrollbar-thumb-rounded-md">
+            {CTclass.pupils.map((pupil) => {
+              return (
+                <PupilListItem
+                  pupil={pupil}
+                  setCurrentPupil={setCurrentPupil}
+                  currentPupil={currentPupil}
+                />
+              );
+            })}
+          </section>
         </ul>
       </section>
     );

@@ -7,12 +7,11 @@ interface Props {
 }
 
 export default function ModifyClass({ setCurrentClass, CTClassId }: Props) {
-  //These will be buttons that perform crud operations on the database for the current class.
+  //These will be buttons that perform crud operations on the database for the current class. Move update option to individual pupils view.
   return (
     <section className="border-4 border-purple-500 p-2">
-      {/* <Button>Add Pupil</Button> */}
       <AddPupilForm CTClassId={CTClassId} setCurrentClass={setCurrentClass} />
-      <p>Update Pupil</p>
+      {/* <p>Update Pupil</p> */}
       <p>Delete Pupil</p>
     </section>
   );

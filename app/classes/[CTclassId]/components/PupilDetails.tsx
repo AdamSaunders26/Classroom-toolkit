@@ -14,7 +14,7 @@ export default function PupilDetails({ pupil, CTClass }: Props) {
       <div className="">
         {pupil ? (
           <p>
-            Name: {pupil?.first_name} {pupil?.last_name}
+            Name: {pupil?.first_name} {pupil?.last_name_initials}
           </p>
         ) : (
           <p>No child selected</p>
