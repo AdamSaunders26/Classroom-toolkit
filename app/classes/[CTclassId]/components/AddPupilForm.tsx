@@ -20,6 +20,7 @@ import {
   postClass,
   postPupil,
 } from "@/app/(app)/fetchFunctions/fetchFunctions";
+import { RxPlus } from "react-icons/rx";
 
 const formSchema = z.object({
   first_name: z.string().min(1, "Required").max(30, {
@@ -62,46 +63,51 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
   return (
     <Form {...form}>
       <form
+        className="bg-ctblue rounded-md w-fit p-4"
         onSubmit={form.handleSubmit(submitHandler)}
-        className=" flex gap-2 "
       >
-        <Button
-          className="border-ctyellow border-2 mt-4"
-          variant="outline"
-          type="submit"
-        >
-          Add new pupil
-        </Button>
-        <FormField
-          control={form.control}
-          name="first_name"
-          render={({ field }) => (
-            <FormItem>
-              <div className="flex justify-between items-center">
-                <FormLabel className="">First Name</FormLabel>
-                <FormMessage className="text-ctyellow" />
-              </div>
-              <FormControl>
-                <Input placeholder="" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="last_name_initials"
-          render={({ field }) => (
-            <FormItem className="w-10">
-              <div className="flex justify-between items-center">
-                <FormLabel className="">Initial</FormLabel>
-                <FormMessage className="text-ctyellow" />
-              </div>
-              <FormControl>
-                <Input placeholder="" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <h3 className="text-xl text-ctyellow">Add pupil to class:</h3>
+        <section className=" flex gap-2  items-end ">
+          <FormField
+            control={form.control}
+            name="first_name"
+            render={({ field }) => (
+              <FormItem>
+                <div className="flex justify-between items-center">
+                  <FormLabel className="text-white text-lg">
+                    First Name
+                  </FormLabel>
+                  <FormMessage className="text-ctred" />
+                </div>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="last_name_initials"
+            render={({ field }) => (
+              <FormItem className="w-14">
+                <div className="flex justify-between items-center">
+                  <FormLabel className="text-white text-lg">Initial</FormLabel>
+                  <FormMessage className="text-ctred" />
+                </div>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <Button
+            className="bg-ctyellow mt-4 text-black hover:bg-ctyellow-400"
+            size="icon"
+            type="submit"
+          >
+            <RxPlus />
+          </Button>
+        </section>
       </form>
     </Form>
   );

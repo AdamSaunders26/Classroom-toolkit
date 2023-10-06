@@ -20,12 +20,13 @@ export default function ClassList({
         <ul>
           <h2 className="text-2xl ">Name:</h2>
           <section className="overflow-auto max-h-[80vh] mt-4 scrollbar-thin scrollbar-thumb-ctblue scrollbar-thumb-rounded-md">
-            {CTclass.pupils.map((pupil) => {
+            {CTclass.pupils.map((pupil, index) => {
               return (
                 <PupilListItem
                   pupil={pupil}
                   setCurrentPupil={setCurrentPupil}
                   currentPupil={currentPupil}
+                  index={index}
                 />
               );
             })}

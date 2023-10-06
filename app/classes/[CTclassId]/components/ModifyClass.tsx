@@ -1,18 +1,26 @@
 import { Button } from "@/components/ui/button";
 import AddPupilForm from "./AddPupilForm";
+import RemovePupilButton from "./RemovePupilButton";
 
 interface Props {
   setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
   CTClassId: number;
+  currentPupil: Pupil;
 }
 
-export default function ModifyClass({ setCurrentClass, CTClassId }: Props) {
+export default function ModifyClass({
+  setCurrentClass,
+  CTClassId,
+  currentPupil,
+}: Props) {
   //These will be buttons that perform crud operations on the database for the current class. Move update option to individual pupils view.
   return (
-    <section className="border-4 border-purple-500 p-2">
+    <section className="flex flex-col gap-2 mx-4 ">
       <AddPupilForm CTClassId={CTClassId} setCurrentClass={setCurrentClass} />
-      {/* <p>Update Pupil</p> */}
-      <p>Delete Pupil</p>
+      <RemovePupilButton
+        currentPupil={currentPupil}
+        setCurrentClass={setCurrentClass}
+      />
     </section>
   );
 }

@@ -36,6 +36,7 @@ export default function CTClassPage({ params }: Props) {
         <ModifyClass
           CTClassId={params.CTclassId}
           setCurrentClass={setCurrentClass}
+          currentPupil={currentPupil}
         />
       </section>
     </main>

@@ -7,11 +7,11 @@ interface Props {
 
 export default function PupilDetails({ pupil, CTClass }: Props) {
   return (
-    <section className="border-4 border-pink-500 p-4">
-      <h2>
+    <section className="m-4 rounded-md bg-ctblue p-4 text-white">
+      <h2 className="text-2xl text-ctyellow">
         {CTClass?.name} - Year {CTClass?.yearGroup}
       </h2>
-      <div className="">
+      <div className="text-xl">
         {pupil ? (
           <p>
             Name: {pupil?.first_name} {pupil?.last_name_initials}

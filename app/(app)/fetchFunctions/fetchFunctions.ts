@@ -59,3 +59,16 @@ export async function postPupil(
   const updatedPupilList = await newPupil.json();
   return updatedPupilList;
 }
+
+export async function deletePupil(pupilId: number | null) {
+  const pupilToDelete = await fetch(
+    `http://localhost:3000/api/pupils/${pupilId}`,
+    { method: "DELETE" }
+  );
+  const updatedClass: CTClass = await pupilToDelete.json();
+  const updatedPupils = updatedClass.pupils.filter((pupil) => {
+    return pupil.id !== pupilId;
+  });
+  updatedClass.pupils = updatedPupils;
+  return updatedClass;
+}
