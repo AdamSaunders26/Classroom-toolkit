@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import AddPupilForm from "./AddPupilForm";
 import RemovePupilButton from "./RemovePupilButton";
+import PastePupils from "./PastePupils";
 
 interface Props {
   setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
@@ -21,6 +22,7 @@ export default function ModifyClass({
         currentPupil={currentPupil}
         setCurrentClass={setCurrentClass}
       />
+      <PastePupils />
     </section>
   );
 }
