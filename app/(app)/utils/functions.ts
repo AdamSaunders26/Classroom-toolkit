@@ -4,13 +4,25 @@ export function formatName(title: string, last_name: string) {
 
 //'Zohaib\n'
 //'Massimo\tAlbanese\n'
+function tabbedNames(pupils: string) {
+  const pupilArray = pupils.split("\n");
+  const pupilObjects = pupilArray.map((pupil) => {
+    if (!pupil) return null;
 
-export function detectPupils(pupils: string) {
+    const nameArray = pupil.split("\t");
+    return { first_name: nameArray[0], last_name_initials: nameArray[1][0] };
+  });
+  return pupilObjects.filter((pupil) => {
+    return pupil;
+  });
+}
+
+function newLineNames(pupils: string) {
   const nameArray = pupils.split("\n");
-  const nameObjects = nameArray.map((pupil) => {
+  return nameArray.map((pupil) => {
     if (pupil.includes(" ")) {
       const splitName = pupil.split(" ");
-      console.log(splitName);
+
       return splitName[1] === ""
         ? { first_name: splitName[0] }
         : { first_name: splitName[0], last_name_initials: splitName[1] };
@@ -18,8 +30,28 @@ export function detectPupils(pupils: string) {
       return { first_name: pupil };
     }
   });
-  console.log(nameObjects);
-  return nameObjects;
+
+  // return nameObjects;
+}
+
+function commaNames(pupils: string) {
+  const nameArray = pupils.split(",");
+  return nameArray.map((pupil) => {
+    const spacelessName = pupil.split(" ");
+    const finalName = spacelessName.filter((name) => {
+      return name;
+    });
+    return { first_name: finalName[0] };
+  });
+}
+export function detectPupils(pupils: string) {
+  if (pupils.includes("\t")) {
+    return tabbedNames(pupils);
+  } else if (pupils.includes("\n")) {
+    return newLineNames(pupils);
+  } else {
+    return commaNames(pupils);
+  }
 }
 
 // detectPupils();
