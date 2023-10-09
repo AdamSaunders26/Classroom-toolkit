@@ -46,16 +46,17 @@ export default function PastePupils() {
     //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
     //     </pre>
     //   ),
-    // })
-    console.log(data);
+    // });
+    // console.log(data);
     console.log(detectPupils(data.newPupils));
-    //'Zohaib\n'
-    //'Massimo\tAlbanese\n'
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full col-span-2 row-span-2 col-start-2 row-start-1 grid grid-rows-2 gap-4"
+      >
         <FormField
           control={form.control}
           name="newPupils"
@@ -63,8 +64,8 @@ export default function PastePupils() {
             <FormItem>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us a little bit about yourself"
-                  className="resize-none"
+                  placeholder="Paste in a class list or type names seperated by commas"
+                  className="resize-none h-full focus-visible:ring-ctblue"
                   {...field}
                 />
               </FormControl>
@@ -72,7 +73,13 @@ export default function PastePupils() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button
+          type="submit"
+          variant="secondary"
+          className="bg-ctyellow hover:bg-ctyellow-400"
+        >
+          Import pupils
+        </Button>
       </form>
     </Form>
   );

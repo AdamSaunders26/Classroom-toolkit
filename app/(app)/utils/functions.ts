@@ -25,7 +25,7 @@ function newLineNames(pupils: string) {
 
       return splitName[1] === ""
         ? { first_name: splitName[0] }
-        : { first_name: splitName[0], last_name_initials: splitName[1] };
+        : { first_name: splitName[0], last_name_initials: splitName[1][0] };
     } else {
       return { first_name: pupil };
     }
