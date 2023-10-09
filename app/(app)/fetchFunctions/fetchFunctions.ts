@@ -46,8 +46,8 @@ export async function deleteClass(classId: number) {
 
 export async function postPupil(
   CTClassId: number,
-  first_name,
-  last_name_initials
+  first_name: string,
+  last_name_initials?: string
 ): Promise<CTClass> {
   const newPupil = await fetch(
     `http://localhost:3000/api/classes/${CTClassId}`,
@@ -71,4 +71,21 @@ export async function deletePupil(pupilId: number | null) {
   });
   updatedClass.pupils = updatedPupils;
   return updatedClass;
+}
+
+export async function postManyPupils(
+  CTClassId: number,
+  pupils: { first_name: string; last_name_initials?: string }[]
+) {
+  const newPupils = await fetch(
+    `http://localhost:3000/api/classes/${CTClassId}/many`,
+    {
+      method: "POST",
+      body: JSON.stringify(pupils),
+    }
+  );
+
+  return newPupils.json().then((updatedClass) => {
+    return updatedClass;
+  });
 }

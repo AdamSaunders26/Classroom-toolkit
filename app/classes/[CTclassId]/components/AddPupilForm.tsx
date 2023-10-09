@@ -63,7 +63,7 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
   return (
     <Form {...form}>
       <form
-        className="bg-ctblue rounded-md w-fit p-4"
+        className="bg-ctblue rounded-md w-full  p-4"
         onSubmit={form.handleSubmit(submitHandler)}
       >
         <h3 className="text-xl text-ctyellow">Add pupil to class:</h3>
