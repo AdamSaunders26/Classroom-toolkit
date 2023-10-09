@@ -7,13 +7,13 @@ export function formatName(title: string, last_name: string) {
 function tabbedNames(pupils: string) {
   const pupilArray = pupils.split("\n");
   const pupilObjects = pupilArray.map((pupil) => {
-    if (!pupil) return null;
+    // if (!pupil) return null;
 
     const nameArray = pupil.split("\t");
-    return { first_name: nameArray[0], last_name_initials: nameArray[1][0] };
+    return { first_name: nameArray[0], last_name_initials: nameArray[1]?.[0] };
   });
   return pupilObjects.filter((pupil) => {
-    return pupil;
+    if (pupil) return pupil;
   });
 }
 
@@ -44,7 +44,9 @@ function commaNames(pupils: string) {
     return { first_name: finalName[0] };
   });
 }
-export function detectPupils(pupils: string) {
+export function detectPupils(
+  pupils: string
+): { first_name: string; last_name_initials?: string }[] {
   if (pupils.includes("\t")) {
     return tabbedNames(pupils);
   } else if (pupils.includes("\n")) {

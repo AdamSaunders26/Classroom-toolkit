@@ -24,7 +24,7 @@ export default function ModifyClass({
         setCurrentClass={setCurrentClass}
       />
       {/* </div> */}
-      <PastePupils />
+      <PastePupils CTClassId={CTClassId} setCurrentClass={setCurrentClass} />
     </section>
   );
 }

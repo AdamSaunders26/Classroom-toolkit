@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { detectPupils } from "@/app/(app)/utils/functions";
+import { postManyPupils } from "@/app/(app)/fetchFunctions/fetchFunctions";
 // import { toast } from "@/components/ui/use-toast"
 
 const FormSchema = z.object({
@@ -33,22 +34,24 @@ const FormSchema = z.object({
     }),
 });
 
-export default function PastePupils() {
+interface Props {
+  CTClassId: number;
+  setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
+}
+
+export default function PastePupils({ CTClassId, setCurrentClass }: Props) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // });
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     // console.log(data);
     console.log(detectPupils(data.newPupils));
+    const updatedClass = await postManyPupils(
+      CTClassId,
+      detectPupils(data.newPupils)
+    );
+    setCurrentClass(updatedClass);
   }
 
   return (

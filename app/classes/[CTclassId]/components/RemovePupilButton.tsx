@@ -12,7 +12,7 @@ export default function RemovePupilButton({
 }: Props) {
   return (
     <Button
-      className="w-fit text-black col-start-1"
+      className="w-full text-black col-start-1"
       variant="destructive"
       onClick={() => {
         if (currentPupil) {
