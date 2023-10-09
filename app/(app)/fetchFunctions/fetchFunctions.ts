@@ -47,7 +47,7 @@ export async function deleteClass(classId: number) {
 export async function postPupil(
   CTClassId: number,
   first_name: string,
-  last_name_initials: string
+  last_name_initials?: string
 ): Promise<CTClass> {
   const newPupil = await fetch(
     `http://localhost:3000/api/classes/${CTClassId}`,
@@ -77,7 +77,6 @@ export async function postManyPupils(
   CTClassId: number,
   pupils: { first_name: string; last_name_initials?: string }[]
 ) {
-  console.log(pupils);
   const newPupils = await fetch(
     `http://localhost:3000/api/classes/${CTClassId}/many`,
     {
