@@ -32,11 +32,17 @@ export async function DELETE(
   request: Request,
   { params }: { params: { id: number } }
 ) {
+  const deletedPupils = await prisma.pupil.deleteMany({
+    where: {
+      CTClassId: Number(params.id),
+    },
+  });
   const deletedClass = await prisma.cTClass.delete({
     where: {
       id: Number(params.id),
     },
   });
+
   return NextResponse.json(deletedClass);
 }
 
