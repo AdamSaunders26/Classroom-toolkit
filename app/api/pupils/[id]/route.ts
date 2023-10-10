@@ -12,7 +12,7 @@ export async function DELETE(
       include: {
         CTClass: {
           include: {
-            pupils: true,
+            pupils: { orderBy: { first_name: "asc" } },
           },
         },
       },
@@ -36,7 +36,9 @@ export async function PATCH(
         id: Number(params.id),
       },
       data: { first_name, last_name_initials },
-      include: { CTClass: { include: { pupils: true } } },
+      include: {
+        CTClass: { include: { pupils: { orderBy: { first_name: "asc" } } } },
+      },
     });
 
     return NextResponse.json(updatedPupil);
