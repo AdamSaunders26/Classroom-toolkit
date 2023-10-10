@@ -32,7 +32,11 @@ export default function CTClassPage({ params }: Props) {
         currentPupil={currentPupil}
       />
       <section className="col-span-4  grid grid-rows-2">
-        <PupilDetails pupil={currentPupil} CTClass={currentClass} />
+        <PupilDetails
+          pupil={currentPupil}
+          CTClass={currentClass}
+          setCurrentClass={setCurrentClass}
+        />
         <ModifyClass
           CTClassId={params.CTclassId}
           setCurrentClass={setCurrentClass}

@@ -37,6 +37,7 @@ export async function DELETE(
       CTClassId: Number(params.id),
     },
   });
+
   const deletedClass = await prisma.cTClass.delete({
     where: {
       id: Number(params.id),
