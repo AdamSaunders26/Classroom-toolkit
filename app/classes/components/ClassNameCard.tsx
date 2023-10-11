@@ -29,8 +29,12 @@ export default function ClassNameCard({ CTClass, setCurrentClass }: Props) {
         key={id}
         href={`/classes/${id}`}
       >
-        <div className="">{name}</div>
-        <div className="text-neutral-700">{yearGroup}</div>
+        <div className="">
+          {name} - {CTClass?.pupils?.length} pupils
+        </div>
+        <div className="text-neutral-700">
+          {yearGroup === "EYFS" ? "EYFS" : `Year ${yearGroup}`}
+        </div>
       </Link>
     </Button>
   );
