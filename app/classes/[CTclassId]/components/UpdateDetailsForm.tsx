@@ -22,7 +22,7 @@ import {
   updatePupil,
 } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { RxPlus } from "react-icons/rx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const formSchema = z.object({
   first_name: z.string().min(1, "Required").max(30, {
@@ -48,6 +48,7 @@ export default function UpdateDetailsForm({
   setUpdatingPupils,
   setCurrentClass,
 }: Props) {
+  //   const [currentPupil, setCurrentPupil] = useState<Pupil>(pupil);
   const defaultValues = {
     first_name: pupil.first_name,
     last_name_initials: pupil.last_name_initials,
@@ -63,7 +64,6 @@ export default function UpdateDetailsForm({
 
   async function submitHandler(values: z.infer<typeof formSchema>) {
     const { first_name, last_name_initials } = values;
-
     const updatedClass = await updatePupil(
       pupil.id,
       first_name,
@@ -71,6 +71,11 @@ export default function UpdateDetailsForm({
     );
     setCurrentClass(updatedClass);
     setUpdatingPupils(false);
+    // setCurrentPupil(() => {
+    //   return updatedClass.pupils.filter((updatedPupil) => {
+    //     return pupil.id === updatedPupil.id;
+    //   })[0];
+    // });
 
     form.reset(defaultValues);
   }

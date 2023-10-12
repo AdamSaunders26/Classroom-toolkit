@@ -15,17 +15,13 @@ interface Props {
 export default function CTClassPage({ params }: Props) {
   const [currentClass, setCurrentClass] = useState<CTClass | null>(null);
   const [currentPupil, setCurrentPupil] = useState<Pupil | null>(null);
-  // const [currentPupilList, setCurrentPupilList] = useState<Pupil[] | null>(
-  //   null
-  // );
-  // const [allClasses, setAllClasses] = useState<CTClass[] | null>(null);
 
   useEffect(() => {
     getSingleClass(params.CTclassId, setCurrentClass);
   }, [params.CTclassId]);
 
   return (
-    <main className=" col-span-4 grid grid-cols-5">
+    <main className=" col-span-4 grid grid-cols-5 ">
       <ClassList
         CTclass={currentClass}
         setCurrentPupil={setCurrentPupil}

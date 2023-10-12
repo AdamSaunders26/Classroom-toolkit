@@ -30,7 +30,7 @@ export async function PATCH(
 ) {
   try {
     const { first_name, last_name_initials } = await request.json();
-    console.log(first_name, last_name_initials);
+
     const updatedPupil = await prisma.pupil.update({
       where: {
         id: Number(params.id),
