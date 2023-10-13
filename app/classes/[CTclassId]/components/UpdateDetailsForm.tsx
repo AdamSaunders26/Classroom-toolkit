@@ -82,7 +82,7 @@ export default function UpdateDetailsForm({
   return updatingPupils ? (
     <Form {...form}>
       <form className="w-full  " onSubmit={form.handleSubmit(submitHandler)}>
-        <section className=" flex gap-2  items-center ">
+        <section className=" flex gap-2 items-center ">
           <h3 className="">Name:</h3>
           <FormField
             control={form.control}
@@ -94,7 +94,7 @@ export default function UpdateDetailsForm({
                   <FormMessage className="text-ctred" />
                 </div> */}
                 <FormControl>
-                  <Input placeholder="" {...field} />
+                  <Input className="" placeholder="" {...field} />
                 </FormControl>
               </FormItem>
             )}

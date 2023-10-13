@@ -1,9 +1,10 @@
 import AddClassForm from "./AddClassForm";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { getAllClasses } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import RemoveClassButton from "./RemoveClassButton";
 import ClassesList from "./ClassesList";
+import { CTClassContext } from "@/app/(app)/context/CurrentCTClassProvider";
 
 interface Props {
   CTClasses: CTClass[] | null;
@@ -13,7 +14,7 @@ export default function CTClassesSidebar() {
   const [allClasses, setAllClasses] = useState<CTClass[] | null>(null);
   const [currentClass, setCurrentClass] = useState<CTClass | null>(null);
   const { data: session } = useSession();
-
+  const { currentCTClass, setCurrentCTClass } = useContext(CTClassContext);
   useEffect(() => {
     if (session?.user?.email)
       getAllClasses(session?.user?.email, setAllClasses);

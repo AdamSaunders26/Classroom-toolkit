@@ -1,5 +1,3 @@
-import Image from "next/image";
-import LogInOutButton from "./appComponents/LogInOutButton";
 import WelcomeMessage from "./appComponents/WelcomeMessage";
 
 export default function Home() {
