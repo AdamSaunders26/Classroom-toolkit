@@ -23,6 +23,7 @@ import {
 } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { RxPlus } from "react-icons/rx";
 import { useEffect, useState } from "react";
+import PupilNameCard from "./PupilNameCard";
 
 const formSchema = z.object({
   first_name: z.string().min(1, "Required").max(30, {
@@ -37,6 +38,7 @@ const formSchema = z.object({
 
 interface Props {
   pupil: Pupil;
+  setCurrentPupil: React.Dispatch<React.SetStateAction<Pupil | null>>;
   updatingPupils: boolean;
   setUpdatingPupils: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
@@ -44,11 +46,11 @@ interface Props {
 
 export default function UpdateDetailsForm({
   pupil,
+  setCurrentPupil,
   updatingPupils,
   setUpdatingPupils,
   setCurrentClass,
 }: Props) {
-  //   const [currentPupil, setCurrentPupil] = useState<Pupil>(pupil);
   const defaultValues = {
     first_name: pupil.first_name,
     last_name_initials: pupil.last_name_initials,
@@ -71,14 +73,17 @@ export default function UpdateDetailsForm({
     );
     setCurrentClass(updatedClass);
     setUpdatingPupils(false);
-    // setCurrentPupil(() => {
-    //   return updatedClass.pupils.filter((updatedPupil) => {
-    //     return pupil.id === updatedPupil.id;
-    //   })[0];
-    // });
+    setCurrentPupil((curr) => {
+      const newPupil = updatedClass.pupils.filter((updatedPupil) => {
+        return curr?.id === updatedPupil.id;
+      });
+
+      return newPupil[0];
+    });
 
     form.reset(defaultValues);
   }
+
   return updatingPupils ? (
     <Form {...form}>
       <form className="w-full  " onSubmit={form.handleSubmit(submitHandler)}>
@@ -125,8 +130,9 @@ export default function UpdateDetailsForm({
       </form>
     </Form>
   ) : (
-    <p className="mt-2">
-      Name: {pupil.first_name} {pupil.last_name_initials}
-    </p>
+    // <p className="mt-2">
+    //   Name: {tempPupil.first_name} {tempPupil.last_name_initials}
+    // </p>
+    <PupilNameCard pupil={pupil} />
   );
 }

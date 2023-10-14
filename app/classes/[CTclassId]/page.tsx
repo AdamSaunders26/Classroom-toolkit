@@ -1,41 +1,40 @@
 "use client";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ClassList from "./components/ClassList";
 import ModifyClass from "./components/ModifyClass";
 import PupilDetails from "./components/PupilDetails";
-import {
-  getAllClasses,
-  getSingleClass,
-} from "@/app/(app)/fetchFunctions/fetchFunctions";
+import { getSingleClass } from "@/app/(app)/fetchFunctions/fetchFunctions";
+import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
 
 interface Props {
   params: { CTclassId: number };
 }
 
 export default function CTClassPage({ params }: Props) {
-  const [currentClass, setCurrentClass] = useState<CTClass | null>(null);
+  const { currentCTClass, setCurrentCTClass } = useContext(CTClassContext);
   const [currentPupil, setCurrentPupil] = useState<Pupil | null>(null);
 
   useEffect(() => {
-    getSingleClass(params.CTclassId, setCurrentClass);
+    getSingleClass(params.CTclassId, setCurrentCTClass);
   }, [params.CTclassId]);
 
   return (
     <main className=" col-span-4 grid grid-cols-5 ">
       <ClassList
-        CTclass={currentClass}
+        CTclass={currentCTClass}
         setCurrentPupil={setCurrentPupil}
         currentPupil={currentPupil}
       />
       <section className="col-span-4  grid grid-rows-2">
         <PupilDetails
           pupil={currentPupil}
-          CTClass={currentClass}
-          setCurrentClass={setCurrentClass}
+          setCurrentPupil={setCurrentPupil}
+          CTClass={currentCTClass}
+          setCurrentClass={setCurrentCTClass}
         />
         <ModifyClass
           CTClassId={params.CTclassId}
-          setCurrentClass={setCurrentClass}
+          setCurrentClass={setCurrentCTClass}
           currentPupil={currentPupil}
         />
       </section>

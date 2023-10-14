@@ -5,12 +5,14 @@ import UpdateDetailsForm from "./UpdateDetailsForm";
 
 interface Props {
   pupil: Pupil | null;
+  setCurrentPupil: React.Dispatch<React.SetStateAction<Pupil | null>>;
   CTClass: CTClass | null;
   setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
 }
 
 export default function PupilDetails({
   pupil,
+  setCurrentPupil,
   CTClass,
   setCurrentClass,
 }: Props) {
@@ -30,6 +32,7 @@ export default function PupilDetails({
         {pupil ? (
           <UpdateDetailsForm
             pupil={pupil}
+            setCurrentPupil={setCurrentPupil}
             updatingPupils={updatingPupils}
             setUpdatingPupils={setUpdatingPupils}
             setCurrentClass={setCurrentClass}
