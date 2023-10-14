@@ -15,6 +15,10 @@ export async function GET(
     where: {
       teacherId: teacher.id,
     },
+    include: {
+      pupils: { orderBy: { first_name: "asc" } },
+    },
   });
+
   return NextResponse.json(classes);
 }

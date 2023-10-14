@@ -1,21 +1,42 @@
 import { formatName } from "@/app/(app)/utils/functions";
+import UpdatePupilButton from "./UpdatePupilButton";
+import { useState } from "react";
+import UpdateDetailsForm from "./UpdateDetailsForm";
 
 interface Props {
   pupil: Pupil | null;
+  setCurrentPupil: React.Dispatch<React.SetStateAction<Pupil | null>>;
   CTClass: CTClass | null;
+  setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
 }
 
-export default function PupilDetails({ pupil, CTClass }: Props) {
+export default function PupilDetails({
+  pupil,
+  setCurrentPupil,
+  CTClass,
+  setCurrentClass,
+}: Props) {
+  const [updatingPupils, setUpdatingPupils] = useState<boolean>(false);
   return (
     <section className="m-4 rounded-md bg-ctblue p-4 text-white">
-      <h2 className="text-2xl text-ctyellow">
-        {CTClass?.name} - Year {CTClass?.yearGroup}
-      </h2>
+      <div className="flex justify-between">
+        <h2 className="text-2xl text-ctyellow">
+          {CTClass?.name} - Year {CTClass?.yearGroup}
+        </h2>
+        <UpdatePupilButton
+          updatingPupils={updatingPupils}
+          setUpdatingPupils={setUpdatingPupils}
+        />
+      </div>
       <div className="text-xl">
         {pupil ? (
-          <p>
-            Name: {pupil?.first_name} {pupil?.last_name_initials}
-          </p>
+          <UpdateDetailsForm
+            pupil={pupil}
+            setCurrentPupil={setCurrentPupil}
+            updatingPupils={updatingPupils}
+            setUpdatingPupils={setUpdatingPupils}
+            setCurrentClass={setCurrentClass}
+          />
         ) : (
           <p>No child selected</p>
         )}

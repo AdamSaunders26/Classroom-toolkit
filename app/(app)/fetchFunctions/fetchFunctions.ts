@@ -89,3 +89,21 @@ export async function postManyPupils(
     return updatedClass;
   });
 }
+
+export async function updatePupil(
+  pupilId: number,
+  first_name: string,
+  last_name_initials?: string
+) {
+  const updatedPupil = await fetch(
+    `http://localhost:3000/api/pupils/${pupilId}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({ first_name, last_name_initials }),
+    }
+  );
+
+  return updatedPupil.json().then((updatedPupil: Pupil) => {
+    return updatedPupil.CTClass;
+  });
+}

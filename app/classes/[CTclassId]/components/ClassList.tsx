@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import PupilListItem from "./PupilListItem";
 
@@ -36,10 +34,6 @@ export default function ClassList({
       </section>
     );
   } else {
-    return (
-      <section className="border-4 p-4 border-blue-500">
-        Class not found
-      </section>
-    );
+    return <section className="p-4">Loading...</section>;
   }
 }

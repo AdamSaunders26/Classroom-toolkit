@@ -24,7 +24,11 @@ export async function POST(request: Request) {
         },
       },
       include: {
-        CTClasses: true,
+        CTClasses: {
+          include: {
+            pupils: { orderBy: { first_name: "asc" } },
+          },
+        },
       },
     });
 

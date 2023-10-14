@@ -19,7 +19,7 @@ export async function POST(
         },
       },
       include: {
-        pupils: true,
+        pupils: { orderBy: { first_name: "asc" } },
       },
     });
 

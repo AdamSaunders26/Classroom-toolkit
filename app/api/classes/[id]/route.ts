@@ -6,21 +6,12 @@ export async function GET(
   { params }: { params: { id: number } }
 ) {
   try {
-    const fetchedClass = (await prisma.cTClass.findUnique({
-      where: {
-        id: Number(params.id),
+    const fetchedClass = await prisma.cTClass.findUnique({
+      where: { id: Number(params.id) },
+      include: {
+        pupils: { orderBy: { first_name: "asc" } },
       },
-    })) as CTClass;
-    fetchedClass.pupils = (await prisma.pupil.findMany({
-      where: {
-        CTClassId: Number(params.id),
-      },
-    })) as unknown as Pupil[];
-    fetchedClass.teacher = (await prisma.user.findUnique({
-      where: {
-        id: fetchedClass.teacherId,
-      },
-    })) as unknown as Teacher;
+    });
 
     return NextResponse.json(fetchedClass);
   } catch (error) {
@@ -37,9 +28,13 @@ export async function DELETE(
       CTClassId: Number(params.id),
     },
   });
+
   const deletedClass = await prisma.cTClass.delete({
     where: {
       id: Number(params.id),
+    },
+    include: {
+      pupils: { orderBy: { first_name: "asc" } },
     },
   });
 
@@ -64,7 +59,7 @@ export async function POST(
         },
       },
       include: {
-        pupils: true,
+        pupils: { orderBy: { first_name: "asc" } },
       },
     });
 

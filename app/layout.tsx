@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter, Sarabun } from "next/font/google";
 import Header from "./(app)/appComponents/Header";
 import NextAuthProvider from "./(app)/NextAuthProvider";
+import { CTClassProvider } from "./(app)/context/CTClassProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const sarabun = Sarabun({ subsets: ["latin"], weight: "500" });
@@ -21,12 +22,15 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={
-          sarabun.className + " bg-neutral-100 h-screen  flex flex-col  "
+          sarabun.className +
+          " bg-neutral-100 h-screen  flex flex-col overflow-hidden "
         }
       >
         <NextAuthProvider>
-          <Header />
-          {children}
+          <CTClassProvider>
+            <Header />
+            {children}
+          </CTClassProvider>
         </NextAuthProvider>
       </body>
     </html>
