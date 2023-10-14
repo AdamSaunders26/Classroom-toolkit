@@ -50,7 +50,7 @@ export async function postPupil(
   first_name: string,
   last_name_initials?: string
 ): Promise<CTClass> {
-  const newPupil = await fetch(`${baseUrl}classes/${CTClassId}`, {
+  const newPupil = await fetch(`${baseUrl}/classes/${CTClassId}`, {
     method: "POST",
     body: JSON.stringify({ first_name, last_name_initials }),
   });
