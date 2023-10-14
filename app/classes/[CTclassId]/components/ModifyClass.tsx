@@ -4,7 +4,7 @@ import RemovePupilButton from "./RemovePupilButton";
 import PastePupils from "./PastePupils";
 
 interface Props {
-  currentClass: CTClass;
+  currentClass: CTClass | null;
   setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
   CTClassId: number;
   currentPupil: Pupil | null;

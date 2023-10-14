@@ -36,7 +36,7 @@ const FormSchema = z.object({
 
 interface Props {
   CTClassId: number;
-  currentClass: CTClass;
+  currentClass: CTClass | null;
   setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
 }
 
