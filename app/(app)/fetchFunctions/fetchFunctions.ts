@@ -17,7 +17,6 @@ export async function getAllClasses(
   email: string,
   setState: Dispatch<SetStateAction<CTClass[] | null>>
 ) {
-  console.log(baseUrl);
   const allClasses = await fetch(`${baseUrl}/teachers/${email}`);
   const parsedAllClasses = (await allClasses.json()) as CTClass[];
 
