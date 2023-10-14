@@ -51,12 +51,11 @@ export default function UpdateDetailsForm({
   setUpdatingPupils,
   setCurrentClass,
 }: Props) {
-  const defaultValues = useMemo(() => {
-    return {
-      first_name: pupil.first_name,
-      last_name_initials: pupil.last_name_initials,
-    };
-  }, []);
+  const defaultValues = {
+    first_name: pupil.first_name,
+    last_name_initials: pupil.last_name_initials,
+  };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues,
@@ -64,8 +63,8 @@ export default function UpdateDetailsForm({
 
   useEffect(() => {
     form.reset(defaultValues);
-  }, [pupil, defaultValues, form]);
-
+  }, [pupil]);
+  console.log("render");
   async function submitHandler(values: z.infer<typeof formSchema>) {
     const { first_name, last_name_initials } = values;
     const updatedClass = await updatePupil(
