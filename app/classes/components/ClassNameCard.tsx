@@ -13,8 +13,8 @@ export default function ClassNameCard({ CTClass, setCurrentClass }: Props) {
   const { id, name, yearGroup } = CTClass;
   let linkClass = " m-2 rounded-md text-black    w-full  p-2";
   CTclassId === id.toString()
-    ? (linkClass += " bg-white  hover:bg-white shadow-xl")
-    : (linkClass += " bg-ctyellow  hover:bg-ctyellow-400 shadow-md");
+    ? (linkClass += " bg-ctyellow hover:bg-ctyellow shadow-xl")
+    : (linkClass += " bg-white  hover:bg-neutral-200 shadow-md");
 
   return (
     <Button

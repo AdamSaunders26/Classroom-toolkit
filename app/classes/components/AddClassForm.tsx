@@ -80,11 +80,7 @@ export default function AddClassForm({ setAllClasses }: Props) {
         />
 
         <YearGroupSelect form={form} />
-        <Button
-          className="border-ctyellow border-2 mt-4"
-          variant="outline"
-          type="submit"
-        >
+        <Button className="bg-ctyellow mt-4 text-black" type="submit">
           Create new class
         </Button>
       </form>

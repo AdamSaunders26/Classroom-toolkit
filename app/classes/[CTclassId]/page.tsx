@@ -34,6 +34,7 @@ export default function CTClassPage({ params }: Props) {
         />
         <ModifyClass
           CTClassId={params.CTclassId}
+          currentClass={currentCTClass}
           setCurrentClass={setCurrentCTClass}
           currentPupil={currentPupil}
         />

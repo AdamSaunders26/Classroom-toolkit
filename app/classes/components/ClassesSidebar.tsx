@@ -34,6 +34,7 @@ export default function CTClassesSidebar() {
         <AddClassForm setAllClasses={setAllCTClasses} />
         <RemoveClassButton
           currentClass={currentCTClass}
+          setCurrentClass={setCurrentCTClass}
           setAllClasses={setAllCTClasses}
         />
       </div>
