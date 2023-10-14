@@ -64,7 +64,7 @@ export default function UpdateDetailsForm({
   useEffect(() => {
     form.reset(defaultValues);
   }, [pupil]);
-  console.log("render");
+
   async function submitHandler(values: z.infer<typeof formSchema>) {
     const { first_name, last_name_initials } = values;
     const updatedClass = await updatePupil(

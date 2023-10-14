@@ -21,7 +21,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { detectPupils } from "@/app/(app)/utils/functions";
 import { postManyPupils } from "@/app/(app)/fetchFunctions/fetchFunctions";
-// import { toast } from "@/components/ui/use-toast"
+import { useEffect } from "react";
 
 const FormSchema = z.object({
   newPupils: z
@@ -36,17 +36,26 @@ const FormSchema = z.object({
 
 interface Props {
   CTClassId: number;
+  currentClass: CTClass | null;
   setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
 }
 
-export default function PastePupils({ CTClassId, setCurrentClass }: Props) {
+export default function PastePupils({
+  CTClassId,
+  currentClass,
+  setCurrentClass,
+}: Props) {
+  const defaultValues = { newPupils: "" };
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues,
   });
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    // console.log(data);
+  useEffect(() => {
+    form.reset(defaultValues);
+  }, [currentClass]);
 
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     const updatedClass = await postManyPupils(
       CTClassId,
       detectPupils(data.newPupils)

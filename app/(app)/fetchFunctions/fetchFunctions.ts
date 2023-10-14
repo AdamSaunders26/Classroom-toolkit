@@ -38,11 +38,11 @@ export async function postClass(
 }
 
 export async function deleteClass(classId: number) {
-  const deleteRoute = await fetch(`${baseUrl}/classes/${classId}`, {
+  const deletedClass = await fetch(`${baseUrl}/classes/${classId}`, {
     method: "DELETE",
   });
 
-  return deleteRoute.json();
+  return deletedClass.json();
 }
 
 export async function postPupil(

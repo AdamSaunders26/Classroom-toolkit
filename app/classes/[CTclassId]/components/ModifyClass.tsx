@@ -4,12 +4,14 @@ import RemovePupilButton from "./RemovePupilButton";
 import PastePupils from "./PastePupils";
 
 interface Props {
+  currentClass: CTClass | null;
   setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
   CTClassId: number;
   currentPupil: Pupil | null;
 }
 
 export default function ModifyClass({
+  currentClass,
   setCurrentClass,
   CTClassId,
   currentPupil,
@@ -22,7 +24,11 @@ export default function ModifyClass({
         setCurrentClass={setCurrentClass}
       />
 
-      <PastePupils CTClassId={CTClassId} setCurrentClass={setCurrentClass} />
+      <PastePupils
+        CTClassId={CTClassId}
+        currentClass={currentClass}
+        setCurrentClass={setCurrentClass}
+      />
     </section>
   );
 }
