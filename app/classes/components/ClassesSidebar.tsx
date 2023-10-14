@@ -19,7 +19,7 @@ export default function CTClassesSidebar() {
   useEffect(() => {
     if (session?.user?.email)
       getAllClasses(session?.user?.email, setAllCTClasses);
-  }, [session?.user, currentCTClass]);
+  }, [session?.user, currentCTClass, setAllCTClasses]);
 
   return (
     <aside className="flex flex-col   bg-ctblue p-2 justify-between ">

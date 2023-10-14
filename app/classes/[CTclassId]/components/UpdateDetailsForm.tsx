@@ -22,7 +22,7 @@ import {
   updatePupil,
 } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { RxPlus } from "react-icons/rx";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PupilNameCard from "./PupilNameCard";
 
 const formSchema = z.object({
@@ -51,10 +51,12 @@ export default function UpdateDetailsForm({
   setUpdatingPupils,
   setCurrentClass,
 }: Props) {
-  const defaultValues = {
-    first_name: pupil.first_name,
-    last_name_initials: pupil.last_name_initials,
-  };
+  const defaultValues = useMemo(() => {
+    return {
+      first_name: pupil.first_name,
+      last_name_initials: pupil.last_name_initials,
+    };
+  }, []);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues,
@@ -62,7 +64,7 @@ export default function UpdateDetailsForm({
 
   useEffect(() => {
     form.reset(defaultValues);
-  }, [pupil]);
+  }, [pupil, defaultValues, form]);
 
   async function submitHandler(values: z.infer<typeof formSchema>) {
     const { first_name, last_name_initials } = values;
