@@ -2,11 +2,9 @@ export function formatName(title: string, last_name: string) {
   return `${title} ${last_name}`;
 }
 
-function tabbedNames(pupils: string) {
+export function tabbedNames(pupils: string) {
   const pupilArray = pupils.split("\n");
   const pupilObjects = pupilArray.map((pupil) => {
-    // if (!pupil) return null;
-
     const nameArray = pupil.split("\t");
     return { first_name: nameArray[0], last_name_initials: nameArray[1]?.[0] };
   });
@@ -15,7 +13,7 @@ function tabbedNames(pupils: string) {
   });
 }
 
-function newLineNames(pupils: string) {
+export function newLineNames(pupils: string) {
   const nameArray = pupils.split("\n");
   return nameArray.map((pupil) => {
     if (pupil.includes(" ")) {
@@ -28,11 +26,9 @@ function newLineNames(pupils: string) {
       return { first_name: pupil };
     }
   });
-
-  // return nameObjects;
 }
 
-function commaNames(pupils: string) {
+export function commaNames(pupils: string) {
   const nameArray = pupils.split(",");
   return nameArray.map((pupil) => {
     const spacelessName = pupil.split(" ");
