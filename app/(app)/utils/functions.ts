@@ -2,8 +2,6 @@ export function formatName(title: string, last_name: string) {
   return `${title} ${last_name}`;
 }
 
-//'Zohaib\n'
-//'Massimo\tAlbanese\n'
 function tabbedNames(pupils: string) {
   const pupilArray = pupils.split("\n");
   const pupilObjects = pupilArray.map((pupil) => {
@@ -55,5 +53,3 @@ export function detectPupils(
     return commaNames(pupils);
   }
 }
-
-// detectPupils();
