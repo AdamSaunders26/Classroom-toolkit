@@ -1,3 +1,5 @@
+import { log } from "console";
+
 export function formatName(title: string, last_name: string) {
   return `${title} ${last_name}`;
 }
@@ -16,26 +18,34 @@ export function tabbedNames(pupils: string) {
 export function newLineNames(pupils: string) {
   const nameArray = pupils.split("\n");
   return nameArray.map((pupil) => {
-    if (pupil.includes(" ")) {
+    if (pupil.includes(" ") && pupil[0] !== " ") {
       const splitName = pupil.split(" ");
-
+      console.log(splitName);
       return splitName[1] === ""
         ? { first_name: splitName[0] }
         : { first_name: splitName[0], last_name_initials: splitName[1][0] };
     } else {
-      return { first_name: pupil };
+      if (pupil[0] === " ") {
+        return { first_name: pupil.slice(1) };
+      } else {
+        return { first_name: pupil };
+      }
     }
   });
 }
 
 export function commaNames(pupils: string) {
   const nameArray = pupils.split(",");
+
   return nameArray.map((pupil) => {
     const spacelessName = pupil.split(" ");
     const finalName = spacelessName.filter((name) => {
       return name;
     });
-    return { first_name: finalName[0] };
+
+    return finalName[1]
+      ? { first_name: finalName[0], last_name_initials: finalName[1][0] }
+      : { first_name: finalName[0] };
   });
 }
 export function detectPupils(
