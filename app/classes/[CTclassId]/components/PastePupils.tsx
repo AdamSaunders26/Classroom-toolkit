@@ -56,6 +56,7 @@ export default function PastePupils({
   }, [currentClass]);
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log(data.newPupils);
     const updatedClass = await postManyPupils(
       CTClassId,
       detectPupils(data.newPupils)
