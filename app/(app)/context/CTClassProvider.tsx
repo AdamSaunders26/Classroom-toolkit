@@ -6,8 +6,10 @@ interface ContextType {
   setCurrentCTClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
   allCTClasses: CTClass[] | null;
   setAllCTClasses: React.Dispatch<React.SetStateAction<CTClass[] | null>>;
-  currentTeacher: Teacher | null;
-  setCurrentTeacher: React.Dispatch<React.SetStateAction<Teacher | null>>;
+  currentTeacher: Teacher | "guest" | null;
+  setCurrentTeacher: React.Dispatch<
+    React.SetStateAction<Teacher | "guest" | null>
+  >;
 }
 export const CTClassContext = createContext<ContextType>({
   currentCTClass: null,
@@ -21,8 +23,10 @@ export const CTClassContext = createContext<ContextType>({
 export function CTClassProvider({ children }) {
   const [currentCTClass, setCurrentCTClass] = useState<CTClass | null>(null);
   const [allCTClasses, setAllCTClasses] = useState<CTClass[] | null>(null);
-  const [currentTeacher, setCurrentTeacher] = useState<Teacher | null>(null);
-
+  const [currentTeacher, setCurrentTeacher] = useState<
+    Teacher | "guest" | null
+  >(null);
+  console.log(currentTeacher);
   return (
     <CTClassContext.Provider
       value={{
