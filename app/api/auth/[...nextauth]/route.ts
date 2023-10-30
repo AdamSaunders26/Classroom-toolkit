@@ -19,7 +19,7 @@ const authOptions = {
       tenantId: "consumers",
     }),
   ],
-  debug: true,
+  // debug: true,
 };
 
 const handler = NextAuth(authOptions);

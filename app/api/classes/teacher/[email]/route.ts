@@ -11,14 +11,14 @@ export async function GET(
     },
   })) as unknown as Teacher;
 
-  // const classes = await prisma.cTClass.findMany({
-  //   where: {
-  //     teacherId: teacher.id,
-  //   },
-  //   include: {
-  //     pupils: { orderBy: { first_name: "asc" } },
-  //   },
-  // });
+  const classes = await prisma.cTClass.findMany({
+    where: {
+      teacherId: teacher.id,
+    },
+    include: {
+      pupils: { orderBy: { first_name: "asc" } },
+    },
+  });
 
-  return NextResponse.json(teacher);
+  return NextResponse.json(classes);
 }

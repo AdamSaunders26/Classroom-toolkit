@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import PupilListItem from "./PupilListItem";
+import { useSession } from "next-auth/react";
 
 interface Props {
   CTclass: CTClass | null;
@@ -12,6 +13,13 @@ export default function ClassList({
   setCurrentPupil,
   currentPupil,
 }: Props) {
+  const { data: session } = useSession();
+  // console.log(session);
+  // console.log(CTclass);
+
+  if (!session) {
+    return <section className="p-4">Current user is not authorised</section>;
+  }
   if (CTclass?.pupils) {
     return (
       <section className=" p-2 px-4 flex flex-col ">
