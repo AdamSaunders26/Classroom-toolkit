@@ -11,13 +11,20 @@ interface Props {
 }
 
 export default function CTClassPage({ params }: Props) {
-  const { currentCTClass, setCurrentCTClass } = useContext(CTClassContext);
+  const { currentCTClass, setCurrentCTClass, currentTeacher } =
+    useContext(CTClassContext);
   const [currentPupil, setCurrentPupil] = useState<Pupil | null>(null);
 
   useEffect(() => {
     getSingleClass(params.CTclassId, setCurrentCTClass);
   }, [params.CTclassId, setCurrentCTClass]);
-
+  if (currentTeacher?.id !== currentCTClass?.teacherId) {
+    return (
+      <main className="p-4 border-4 bg-ctblue text-white col-span-4 place-self-center rounded-md border-ctyellow">
+        Current user is not authorised to view this section.
+      </main>
+    );
+  }
   return (
     <main className=" col-span-4 grid grid-cols-5 ">
       <ClassList

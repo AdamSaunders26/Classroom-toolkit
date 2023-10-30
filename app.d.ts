@@ -21,8 +21,7 @@ declare global {
     title?: string;
     name: string;
     email: string;
-    createdAt: Date;
-    updatedAt: Date;
+    emailVerified: Date;
     CTClasses: CTClass[];
   }
 }

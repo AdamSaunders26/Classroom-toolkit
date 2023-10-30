@@ -17,7 +17,7 @@ export async function getAllClasses(
   email: string,
   setState: Dispatch<SetStateAction<CTClass[] | null>>
 ) {
-  const allClasses = await fetch(`${baseUrl}/teachers/${email}`);
+  const allClasses = await fetch(`${baseUrl}/classes/teacher/${email}`);
   const parsedAllClasses = (await allClasses.json()) as CTClass[];
 
   setState(parsedAllClasses);
@@ -97,4 +97,9 @@ export async function updatePupil(
   return updatedPupil.json().then((updatedPupil: Pupil) => {
     return updatedPupil.CTClass;
   });
+}
+
+export async function getTeacher(email: string) {
+  const teacher = await fetch(`${baseUrl}/teachers/${email}`);
+  return teacher.json();
 }
