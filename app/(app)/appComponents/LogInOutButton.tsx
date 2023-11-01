@@ -37,8 +37,7 @@ export default function LogInOutButton({ header }: Props) {
         onClick={() => {
           setCurrentTeacher(null);
           if (session) {
-            signOut();
-            router.push("/");
+            signOut({ callbackUrl: process.env.NEXT_PUBLIC_HOME_URL });
           } else {
             signIn();
           }

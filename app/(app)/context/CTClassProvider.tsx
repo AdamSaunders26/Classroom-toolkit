@@ -26,7 +26,7 @@ export function CTClassProvider({ children }) {
   const [currentTeacher, setCurrentTeacher] = useState<
     Teacher | "guest" | null
   >(null);
-  console.log(currentTeacher);
+
   return (
     <CTClassContext.Provider
       value={{

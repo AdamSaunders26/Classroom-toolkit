@@ -22,15 +22,21 @@ export default function CTClassesSidebar() {
     setCurrentCTClass,
     allCTClasses,
     setAllCTClasses,
+    currentTeacher,
     setCurrentTeacher,
   } = useContext(CTClassContext);
   useEffect(() => {
     if (session?.user?.email)
       getAllClasses(session.user.email, setAllCTClasses);
-
-    getTeacher(session?.user?.email!).then((teacher) => {
-      setCurrentTeacher(teacher);
-    });
+    if (currentTeacher !== "guest") {
+      getTeacher(session?.user?.email!).then((teacher) => {
+        setCurrentTeacher(teacher);
+      });
+    }
+    console.log(currentCTClass);
+    console.log(allCTClasses);
+    if (currentTeacher === "guest") {
+    }
   }, [session?.user, currentCTClass, setAllCTClasses]);
 
   return (
