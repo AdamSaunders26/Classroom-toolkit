@@ -1,15 +1,14 @@
 "use client";
 import { createContext, useContext, useState } from "react";
+import { guestTeacher } from "../guestData";
 
 interface ContextType {
   currentCTClass: CTClass | null;
   setCurrentCTClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
   allCTClasses: CTClass[] | null;
   setAllCTClasses: React.Dispatch<React.SetStateAction<CTClass[] | null>>;
-  currentTeacher: Teacher | "guest" | null;
-  setCurrentTeacher: React.Dispatch<
-    React.SetStateAction<Teacher | "guest" | null>
-  >;
+  currentTeacher: Teacher | null;
+  setCurrentTeacher: React.Dispatch<React.SetStateAction<Teacher | null>>;
 }
 export const CTClassContext = createContext<ContextType>({
   currentCTClass: null,
@@ -23,10 +22,9 @@ export const CTClassContext = createContext<ContextType>({
 export function CTClassProvider({ children }) {
   const [currentCTClass, setCurrentCTClass] = useState<CTClass | null>(null);
   const [allCTClasses, setAllCTClasses] = useState<CTClass[] | null>(null);
-  const [currentTeacher, setCurrentTeacher] = useState<
-    Teacher | "guest" | null
-  >(null);
-
+  const [currentTeacher, setCurrentTeacher] = useState<Teacher | null>(null);
+  console.log(allCTClasses);
+  console.log(currentCTClass);
   return (
     <CTClassContext.Provider
       value={{

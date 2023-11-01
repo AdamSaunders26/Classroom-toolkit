@@ -3,13 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { CTClassContext } from "../context/CTClassProvider";
-import { signOut } from "next-auth/react";
+import { guestTeacher } from "../guestData";
 
 export default function GuestButton() {
   const { setCurrentTeacher } = useContext(CTClassContext);
 
   function clickHandler() {
-    setCurrentTeacher("guest");
+    setCurrentTeacher(guestTeacher);
   }
   return (
     <Button

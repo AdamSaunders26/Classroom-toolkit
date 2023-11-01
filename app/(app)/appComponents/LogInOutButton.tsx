@@ -19,7 +19,7 @@ export default function LogInOutButton({ header }: Props) {
     ? "bg-ctblue hover:bg-ctblue-300"
     : "rounded-md bg-ctyellow text-black hover:bg-ctyellow-300";
 
-  if (currentTeacher === "guest" && header) {
+  if (currentTeacher?.id === "guest" && header) {
     return (
       <Button
         className={buttonClass}

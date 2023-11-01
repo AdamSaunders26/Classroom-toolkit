@@ -15,9 +15,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import YearGroupSelect from "./YearGroupSelect";
 import { postClass } from "@/app/(app)/fetchFunctions/fetchFunctions";
+import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
 
 const formSchema = z.object({
   name: z.string().min(1, "Required").max(20, {
@@ -34,6 +35,8 @@ interface Props {
 }
 export default function AddClassForm({ setAllClasses }: Props) {
   const { data: session } = useSession();
+  const { currentTeacher, setAllCTClasses, allCTClasses } =
+    useContext(CTClassContext);
   const defaultValues = {
     name: "",
     yearGroup: "",
@@ -54,6 +57,26 @@ export default function AddClassForm({ setAllClasses }: Props) {
 
       setAllClasses(updatedClassList);
       form.reset(defaultValues);
+    }
+
+    if (currentTeacher?.id === "guest") {
+      // console.log(name, yearGroup);
+      // console.log(allCTClasses);
+      setAllCTClasses((curr) => {
+        const newTempClass = {
+          id: Date.now(),
+          name: name,
+          yearGroup: yearGroup,
+          teacherId: "guest",
+          pupils: [],
+        };
+
+        if (curr) {
+          return [...curr, newTempClass];
+        } else {
+          return null;
+        }
+      });
     }
   }
 
@@ -80,7 +103,10 @@ export default function AddClassForm({ setAllClasses }: Props) {
         />
 
         <YearGroupSelect form={form} />
-        <Button className="bg-ctyellow mt-4 text-black" type="submit">
+        <Button
+          className="bg-ctyellow mt-4 text-black hover:bg-ctyellow-300"
+          type="submit"
+        >
           Create new class
         </Button>
       </form>

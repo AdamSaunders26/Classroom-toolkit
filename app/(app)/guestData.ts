@@ -1,4 +1,4 @@
-export const guestAllClasses = [
+export const guestAllClasses: CTClass[] = [
   {
     id: 0,
     name: "Kestrels",
@@ -14,3 +14,12 @@ export const guestAllClasses = [
     pupils: [],
   },
 ];
+
+export const guestTeacher: Teacher = {
+  id: "guest",
+  name: "Professor Guest",
+  email: "contact@adam-saunders.dev",
+  emailVerified: null,
+  image: null,
+  CTClasses: guestAllClasses,
+};
