@@ -24,7 +24,6 @@ export function CTClassProvider({ children }) {
   const [allCTClasses, setAllCTClasses] = useState<CTClass[] | null>(null);
   const [currentTeacher, setCurrentTeacher] = useState<Teacher | null>(null);
   console.log(allCTClasses);
-  console.log(currentCTClass);
   return (
     <CTClassContext.Provider
       value={{

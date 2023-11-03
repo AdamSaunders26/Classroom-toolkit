@@ -3,7 +3,7 @@ declare global {
     id: number;
     first_name: string;
     last_name_initials?: string;
-    CTClass: CTClass;
+    CTClass?: CTClass;
     CTClassId: number;
   }
 

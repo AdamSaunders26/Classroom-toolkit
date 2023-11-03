@@ -60,8 +60,6 @@ export default function AddClassForm({ setAllClasses }: Props) {
     }
 
     if (currentTeacher?.id === "guest") {
-      // console.log(name, yearGroup);
-      // console.log(allCTClasses);
       setAllCTClasses((curr) => {
         const newTempClass = {
           id: Date.now(),
