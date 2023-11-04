@@ -25,6 +25,7 @@ export default function LogInOutButton({ header }: Props) {
         className={buttonClass}
         onClick={() => {
           setCurrentTeacher(null);
+          router.push(process.env.NEXT_PUBLIC_HOME_URL as string);
         }}
       >
         Guest - sign out

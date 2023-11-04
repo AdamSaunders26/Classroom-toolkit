@@ -63,7 +63,7 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
         curr.forEach((CTClass) => {
           ejectArray.push(CTClass.pupils.length === 0);
         });
-        console.log("the reason");
+
         if (
           !ejectArray.includes(false) &&
           currentCTClass?.pupils.length === 0
