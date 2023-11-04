@@ -57,14 +57,13 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
   });
 
   useEffect(() => {
-    console.log(allCTClasses);
-    console.log(currentCTClass);
     setAllCTClasses((curr) => {
       if (curr) {
         const ejectArray: boolean[] = [];
         curr.forEach((CTClass) => {
           ejectArray.push(CTClass.pupils.length === 0);
         });
+        console.log("the reason");
         if (
           !ejectArray.includes(false) &&
           currentCTClass?.pupils.length === 0
@@ -73,15 +72,12 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
         }
       }
       if (curr && currentCTClass) {
-        console.log(curr);
-        const copyClasses = { ...curr };
-        const masterList = copyClasses.map((copyClass) => {
-          return { [copyClass.name]: copyClass };
-        });
-        console.log(masterList);
-        masterList[currentCTClass.name] = currentCTClass;
-        const updatedClasses = masterList.map((updatedClass) => {
-          return Object.values(updatedClass)[0];
+        const copyClasses = [...curr];
+        const masterList = copyClasses;
+        const updatedClasses = masterList.map((CTClass) => {
+          return CTClass.name === currentCTClass.name
+            ? currentCTClass
+            : CTClass;
         });
         return updatedClasses;
       } else {
