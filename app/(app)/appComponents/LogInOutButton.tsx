@@ -15,12 +15,13 @@ export default function LogInOutButton({ header }: Props) {
   const { data: session } = useSession();
   const { currentTeacher, setCurrentTeacher } = useContext(CTClassContext);
   const router = useRouter();
+
   const buttonClass = header
     ? "bg-ctblue hover:bg-ctblue-300"
     : "rounded-md bg-ctyellow text-black hover:bg-ctyellow-300";
 
   if (currentTeacher?.id === "guest" && header) {
-    guestSignOut(buttonClass, setCurrentTeacher, router);
+    return guestSignOut(buttonClass, setCurrentTeacher, router);
   } else {
     return (
       <Button
@@ -30,7 +31,9 @@ export default function LogInOutButton({ header }: Props) {
           if (session) {
             signOut({ callbackUrl: process.env.NEXT_PUBLIC_HOME_URL });
           } else {
-            signIn();
+            signIn(undefined, {
+              callbackUrl: process.env.NEXT_PUBLIC_HOME_URL + "/classes",
+            });
           }
         }}
       >
