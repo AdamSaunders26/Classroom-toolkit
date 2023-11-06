@@ -31,7 +31,9 @@ export default function LogInOutButton({ header }: Props) {
           if (session) {
             signOut({ callbackUrl: process.env.NEXT_PUBLIC_HOME_URL });
           } else {
-            signIn();
+            signIn(undefined, {
+              callbackUrl: process.env.NEXT_PUBLIC_HOME_URL + "/classes",
+            });
           }
         }}
       >
