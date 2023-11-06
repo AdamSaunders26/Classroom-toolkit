@@ -78,7 +78,8 @@ export default function UpdateDetailsForm({
         first_name,
         last_name_initials,
         setCurrentPupil,
-        currentCTClass
+        currentCTClass,
+        setCurrentCTClass
       );
     } else {
       const updatedClass = await updatePupil(

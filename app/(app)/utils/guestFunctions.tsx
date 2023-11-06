@@ -5,9 +5,11 @@ import { CTClassContext } from "../context/CTClassProvider";
 import { useRouter } from "next/router";
 import { detectPupils } from "./functions";
 
-export function guestSignOut(buttonClass: string) {
-  const { setCurrentTeacher } = useContext(CTClassContext);
-  const router = useRouter();
+export function guestSignOut(
+  buttonClass: string,
+  setCurrentTeacher: React.Dispatch<React.SetStateAction<Teacher | null>>,
+  router
+) {
   return (
     <Button
       className={buttonClass}
@@ -25,9 +27,9 @@ export function getSingleGuestClass(
   allCTClasses: CTClass[],
   params: {
     CTclassId: number;
-  }
+  },
+  setCurrentCTClass: React.Dispatch<React.SetStateAction<CTClass | null>>
 ) {
-  const { setCurrentCTClass } = useContext(CTClassContext);
   setCurrentCTClass(() => {
     const currentGuestClass = allCTClasses?.filter((guestClass) => {
       return guestClass.id == params.CTclassId;
@@ -37,8 +39,12 @@ export function getSingleGuestClass(
   });
 }
 
-export function addGuestPupil(first_name, last_name_initials, currentCTClass) {
-  const { setCurrentCTClass } = useContext(CTClassContext);
+export function addGuestPupil(
+  first_name: string,
+  last_name_initials: string | undefined,
+  currentCTClass: CTClass,
+  setCurrentCTClass: React.Dispatch<React.SetStateAction<CTClass | null>>
+) {
   const newPupil: Pupil = {
     id: Date.now() * Math.random(),
     first_name,
@@ -59,9 +65,9 @@ export function pasteGuestPupils(
   currentCTClass: CTClass,
   formData: {
     newPupils: string;
-  }
+  },
+  setCurrentCTClass: React.Dispatch<React.SetStateAction<CTClass | null>>
 ) {
-  const { setCurrentCTClass } = useContext(CTClassContext);
   const newPupils = detectPupils(formData.newPupils);
   const pupilsToAdd = newPupils.map((pupil) => {
     const newPupil: Pupil = {
@@ -91,8 +97,10 @@ export function sortGuestClass(a, b) {
   return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
 }
 
-export function removeGuestPupil(currentPupil: Pupil) {
-  const { setCurrentCTClass } = useContext(CTClassContext);
+export function removeGuestPupil(
+  currentPupil: Pupil,
+  setCurrentCTClass: React.Dispatch<React.SetStateAction<CTClass | null>>
+) {
   setCurrentCTClass((curr) => {
     if (curr) {
       return {
@@ -112,9 +120,9 @@ export function updateGuestPupil(
   first_name: string,
   last_name_initials: string | undefined,
   setCurrentPupil: React.Dispatch<React.SetStateAction<Pupil | null>>,
-  currentCTClass: CTClass
+  currentCTClass: CTClass,
+  setCurrentCTClass: React.Dispatch<React.SetStateAction<CTClass | null>>
 ) {
-  const { setCurrentCTClass } = useContext(CTClassContext);
   setCurrentCTClass((curr) => {
     if (curr) {
       const pupils = [...curr.pupils];
@@ -138,8 +146,11 @@ export function updateGuestPupil(
   });
 }
 
-export function addGuestClass(name: string, yearGroup: string) {
-  const { setAllCTClasses } = useContext(CTClassContext);
+export function addGuestClass(
+  name: string,
+  yearGroup: string,
+  setAllCTClasses: React.Dispatch<React.SetStateAction<CTClass[] | null>>
+) {
   setAllCTClasses((curr) => {
     const newTempClass = {
       id: Date.now(),

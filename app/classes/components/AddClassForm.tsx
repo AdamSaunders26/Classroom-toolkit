@@ -59,7 +59,7 @@ export default function AddClassForm({ setAllClasses }: Props) {
       setAllClasses(updatedClassList);
       form.reset(defaultValues);
     } else if (currentTeacher?.id === "guest") {
-      addGuestClass(name, yearGroup);
+      addGuestClass(name, yearGroup, setAllCTClasses);
     }
   }
 

@@ -14,13 +14,13 @@ interface Props {
 export default function LogInOutButton({ header }: Props) {
   const { data: session } = useSession();
   const { currentTeacher, setCurrentTeacher } = useContext(CTClassContext);
-
+  const router = useRouter();
   const buttonClass = header
     ? "bg-ctblue hover:bg-ctblue-300"
     : "rounded-md bg-ctyellow text-black hover:bg-ctyellow-300";
 
   if (currentTeacher?.id === "guest" && header) {
-    guestSignOut(buttonClass);
+    guestSignOut(buttonClass, setCurrentTeacher, router);
   } else {
     return (
       <Button

@@ -90,7 +90,12 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
   async function submitHandler(values: z.infer<typeof formSchema>) {
     const { first_name, last_name_initials } = values;
     if (currentTeacher?.id === "guest" && currentCTClass) {
-      addGuestPupil(first_name, last_name_initials, currentCTClass);
+      addGuestPupil(
+        first_name,
+        last_name_initials,
+        currentCTClass,
+        setCurrentCTClass
+      );
     } else {
       const updatedClassList = await postPupil(
         CTClassId,

@@ -61,7 +61,7 @@ export default function PastePupils({
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     if (currentTeacher?.id === "guest" && currentCTClass) {
-      pasteGuestPupils(currentCTClass, data);
+      pasteGuestPupils(currentCTClass, data, setCurrentCTClass);
     } else {
       const updatedClass = await postManyPupils(
         CTClassId,

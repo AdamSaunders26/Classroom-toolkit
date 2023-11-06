@@ -18,7 +18,7 @@ export default function RemovePupilButton({
   function clickHandler() {
     if (currentPupil) {
       if (currentTeacher?.id === "guest") {
-        removeGuestPupil(currentPupil);
+        removeGuestPupil(currentPupil, setCurrentClass);
       } else {
         deletePupil(currentPupil.id).then((updatedClass) => {
           setCurrentClass(updatedClass);
