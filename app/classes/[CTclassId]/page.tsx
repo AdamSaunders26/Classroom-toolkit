@@ -5,6 +5,7 @@ import ModifyClass from "./components/ModifyClass";
 import PupilDetails from "./components/PupilDetails";
 import { getSingleClass } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
+import { getSingleGuestClass } from "@/app/(app)/utils/guestFunctions";
 
 interface Props {
   params: { CTclassId: number };
@@ -17,13 +18,7 @@ export default function CTClassPage({ params }: Props) {
 
   useEffect(() => {
     if (currentTeacher?.id === "guest" && allCTClasses) {
-      setCurrentCTClass(() => {
-        const currentGuestClass = allCTClasses?.filter((guestClass) => {
-          return guestClass.id == params.CTclassId;
-        });
-
-        return currentGuestClass[0];
-      });
+      getSingleGuestClass(allCTClasses, params);
     } else {
       getSingleClass(params.CTclassId, setCurrentCTClass);
     }

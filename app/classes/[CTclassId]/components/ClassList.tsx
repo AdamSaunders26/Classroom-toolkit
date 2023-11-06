@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useContext } from "react";
 import PupilListItem from "./PupilListItem";
 import { useSession } from "next-auth/react";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
+import { sortGuestClass } from "@/app/(app)/utils/guestFunctions";
 
 interface Props {
   CTclass: CTClass | null;
@@ -18,15 +19,10 @@ export default function ClassList({
   const { currentTeacher } = useContext(CTClassContext);
 
   let classList = CTclass?.pupils;
-  console.log(classList);
+
   if (currentTeacher?.id === "guest") {
-    classList = CTclass?.pupils.toSorted((a, b) => {
-      const nameA = a.first_name.toUpperCase();
-      var nameB = b.first_name.toUpperCase();
-      return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
-    });
+    classList = CTclass?.pupils.toSorted(sortGuestClass);
   }
-  console.log(classList);
 
   if (CTclass?.pupils) {
     return (

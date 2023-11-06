@@ -23,6 +23,7 @@ import {
 import { RxPlus } from "react-icons/rx";
 import { useContext, useEffect } from "react";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
+import { addGuestPupil } from "@/app/(app)/utils/guestFunctions";
 
 const formSchema = z.object({
   first_name: z.string().min(1, "Required").max(30, {
@@ -89,27 +90,13 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
   async function submitHandler(values: z.infer<typeof formSchema>) {
     const { first_name, last_name_initials } = values;
     if (currentTeacher?.id === "guest" && currentCTClass) {
-      const newPupil: Pupil = {
-        id: Date.now() * Math.random(),
-        first_name,
-        last_name_initials,
-        CTClassId: currentCTClass?.id,
-      };
-
-      setCurrentCTClass((curr) => {
-        if (curr) {
-          return { ...curr, pupils: [...curr.pupils, newPupil] };
-        } else {
-          return null;
-        }
-      });
+      addGuestPupil(first_name, last_name_initials, currentCTClass);
     } else {
       const updatedClassList = await postPupil(
         CTClassId,
         first_name,
         last_name_initials
       );
-
       setCurrentClass(updatedClassList);
     }
     form.reset(defaultValues);

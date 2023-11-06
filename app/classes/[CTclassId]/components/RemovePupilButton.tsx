@@ -1,5 +1,6 @@
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
 import { deletePupil } from "@/app/(app)/fetchFunctions/fetchFunctions";
+import { removeGuestPupil } from "@/app/(app)/utils/guestFunctions";
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 
@@ -12,24 +13,12 @@ export default function RemovePupilButton({
   currentPupil,
   setCurrentClass,
 }: Props) {
-  const { currentCTClass, setCurrentCTClass, currentTeacher } =
-    useContext(CTClassContext);
+  const { currentTeacher } = useContext(CTClassContext);
 
   function clickHandler() {
     if (currentPupil) {
       if (currentTeacher?.id === "guest") {
-        setCurrentCTClass((curr) => {
-          if (curr) {
-            return {
-              ...curr,
-              pupils: curr.pupils.filter((pupil) => {
-                return pupil.id !== currentPupil.id;
-              }),
-            };
-          } else {
-            return null;
-          }
-        });
+        removeGuestPupil(currentPupil);
       } else {
         deletePupil(currentPupil.id).then((updatedClass) => {
           setCurrentClass(updatedClass);

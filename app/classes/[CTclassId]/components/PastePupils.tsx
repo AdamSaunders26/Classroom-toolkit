@@ -23,6 +23,7 @@ import { detectPupils } from "@/app/(app)/utils/functions";
 import { postManyPupils } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { useContext, useEffect } from "react";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
+import { pasteGuestPupils } from "@/app/(app)/utils/guestFunctions";
 
 const FormSchema = z.object({
   newPupils: z
@@ -60,28 +61,7 @@ export default function PastePupils({
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     if (currentTeacher?.id === "guest" && currentCTClass) {
-      const newPupils = detectPupils(data.newPupils);
-
-      const pupilsToAdd = newPupils.map((pupil) => {
-        const newPupil: Pupil = {
-          id: Date.now() * Math.random(),
-          first_name: pupil.first_name,
-          last_name_initials: pupil.last_name_initials
-            ? pupil.last_name_initials
-            : "",
-          CTClassId: currentCTClass?.id,
-        };
-
-        return newPupil;
-      });
-
-      setCurrentClass((curr) => {
-        if (curr) {
-          return { ...curr, pupils: [...curr.pupils.concat(pupilsToAdd)] };
-        } else {
-          return null;
-        }
-      });
+      pasteGuestPupils(currentCTClass, data);
     } else {
       const updatedClass = await postManyPupils(
         CTClassId,

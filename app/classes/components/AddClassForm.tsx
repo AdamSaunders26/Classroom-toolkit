@@ -19,6 +19,7 @@ import { Dispatch, SetStateAction, useContext } from "react";
 import YearGroupSelect from "./YearGroupSelect";
 import { postClass } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
+import { addGuestClass } from "@/app/(app)/utils/guestFunctions";
 
 const formSchema = z.object({
   name: z.string().min(1, "Required").max(20, {
@@ -57,24 +58,8 @@ export default function AddClassForm({ setAllClasses }: Props) {
 
       setAllClasses(updatedClassList);
       form.reset(defaultValues);
-    }
-
-    if (currentTeacher?.id === "guest") {
-      setAllCTClasses((curr) => {
-        const newTempClass = {
-          id: Date.now(),
-          name: name,
-          yearGroup: yearGroup,
-          teacherId: "guest",
-          pupils: [],
-        };
-
-        if (curr) {
-          return [...curr, newTempClass];
-        } else {
-          return null;
-        }
-      });
+    } else if (currentTeacher?.id === "guest") {
+      addGuestClass(name, yearGroup);
     }
   }
 
