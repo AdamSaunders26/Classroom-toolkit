@@ -20,7 +20,7 @@ export default function LogInOutButton({ header }: Props) {
     : "rounded-md bg-ctyellow text-black hover:bg-ctyellow-300";
 
   if (currentTeacher?.id === "guest" && header) {
-    guestSignOut(buttonClass, setCurrentTeacher, router);
+    return guestSignOut(buttonClass, setCurrentTeacher, router);
   } else {
     return (
       <Button
