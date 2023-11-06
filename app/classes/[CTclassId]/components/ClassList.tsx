@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useContext } from "react";
 import PupilListItem from "./PupilListItem";
 import { useSession } from "next-auth/react";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
+import { sortGuestClass } from "@/app/(app)/utils/guestFunctions";
 
 interface Props {
   CTclass: CTClass | null;
@@ -17,20 +18,19 @@ export default function ClassList({
   const { data: session } = useSession();
   const { currentTeacher } = useContext(CTClassContext);
 
-  // if (!session || currentTeacher?.id !== CTclass?.teacherId) {
-  //   return (
-  //     <section className="p-4">
-  //       Current user is not authorised to access this section.
-  //     </section>
-  //   );
-  // }
+  let classList = CTclass?.pupils;
+
+  if (currentTeacher?.id === "guest") {
+    classList = CTclass?.pupils.toSorted(sortGuestClass);
+  }
+
   if (CTclass?.pupils) {
     return (
       <section className=" p-2 px-4 flex flex-col ">
         <ul>
           <h2 className="text-2xl ">Name:</h2>
           <section className="overflow-auto max-h-[80vh] mt-4 scrollbar-thin scrollbar-thumb-ctblue scrollbar-thumb-rounded-md">
-            {CTclass.pupils.map((pupil, index) => {
+            {classList?.map((pupil, index) => {
               return (
                 <PupilListItem
                   key={pupil.id}

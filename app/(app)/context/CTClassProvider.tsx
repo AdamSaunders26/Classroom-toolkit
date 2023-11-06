@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useContext, useState } from "react";
+import { guestTeacher } from "../guestData";
 
 interface ContextType {
   currentCTClass: CTClass | null;

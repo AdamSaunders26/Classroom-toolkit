@@ -22,8 +22,10 @@ import {
   updatePupil,
 } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { RxPlus } from "react-icons/rx";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import PupilNameCard from "./PupilNameCard";
+import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
+import { updateGuestPupil } from "@/app/(app)/utils/guestFunctions";
 
 const formSchema = z.object({
   first_name: z.string().min(1, "Required").max(30, {
@@ -51,6 +53,8 @@ export default function UpdateDetailsForm({
   setUpdatingPupils,
   setCurrentClass,
 }: Props) {
+  const { currentCTClass, setCurrentCTClass, currentTeacher } =
+    useContext(CTClassContext);
   const defaultValues = {
     first_name: pupil.first_name,
     last_name_initials: pupil.last_name_initials,
@@ -67,21 +71,32 @@ export default function UpdateDetailsForm({
 
   async function submitHandler(values: z.infer<typeof formSchema>) {
     const { first_name, last_name_initials } = values;
-    const updatedClass = await updatePupil(
-      pupil.id,
-      first_name,
-      last_name_initials
-    );
-    setCurrentClass(updatedClass);
-    setUpdatingPupils(false);
-    setCurrentPupil((curr) => {
-      const newPupil = updatedClass.pupils.filter((updatedPupil) => {
-        return curr?.id === updatedPupil.id;
+
+    if (currentTeacher?.id === "guest" && currentCTClass) {
+      updateGuestPupil(
+        pupil,
+        first_name,
+        last_name_initials,
+        setCurrentPupil,
+        currentCTClass,
+        setCurrentCTClass
+      );
+    } else {
+      const updatedClass = await updatePupil(
+        pupil.id,
+        first_name,
+        last_name_initials
+      );
+      setCurrentClass(updatedClass);
+      setCurrentPupil((curr) => {
+        const newPupil = updatedClass.pupils.filter((updatedPupil) => {
+          return curr?.id === updatedPupil.id;
+        });
+
+        return newPupil[0];
       });
-
-      return newPupil[0];
-    });
-
+    }
+    setUpdatingPupils(false);
     form.reset(defaultValues);
   }
 

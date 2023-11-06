@@ -3,7 +3,7 @@ declare global {
     id: number;
     first_name: string;
     last_name_initials?: string;
-    CTClass: CTClass;
+    CTClass?: CTClass;
     CTClassId: number;
   }
 
@@ -12,7 +12,7 @@ declare global {
     name: string;
     pupils: Pupil[];
     yearGroup: string;
-    teacher: Teacher;
+    teacher?: Teacher;
     teacherId: string;
   }
 
@@ -21,8 +21,9 @@ declare global {
     title?: string;
     name: string;
     email: string;
-    emailVerified: Date;
+    emailVerified: Date | null;
     CTClasses: CTClass[];
+    image: string | null;
   }
 }
 export {};

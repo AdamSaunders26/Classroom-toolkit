@@ -18,10 +18,6 @@ export default function ModifyClass({
   CTClassId,
   currentPupil,
 }: Props) {
-  // const { currentTeacher } = useContext(CTClassContext);
-  // if (currentTeacher?.id !== currentClass?.teacherId) {
-  //   return null;
-  // }
   return (
     <section className="grid grid-cols-3 grid-rows-2 mx-4 gap-4">
       <AddPupilForm CTClassId={CTClassId} setCurrentClass={setCurrentClass} />

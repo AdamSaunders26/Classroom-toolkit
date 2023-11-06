@@ -21,6 +21,9 @@ import {
   postPupil,
 } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { RxPlus } from "react-icons/rx";
+import { useContext, useEffect } from "react";
+import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
+import { addGuestPupil } from "@/app/(app)/utils/guestFunctions";
 
 const formSchema = z.object({
   first_name: z.string().min(1, "Required").max(30, {
@@ -38,6 +41,13 @@ interface Props {
 }
 export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
   const { data: session } = useSession();
+  const {
+    currentCTClass,
+    setCurrentCTClass,
+    setAllCTClasses,
+    allCTClasses,
+    currentTeacher,
+  } = useContext(CTClassContext);
   const defaultValues = {
     first_name: "",
     last_name_initials: "",
@@ -47,16 +57,53 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
     defaultValues,
   });
 
+  useEffect(() => {
+    setAllCTClasses((curr) => {
+      if (curr) {
+        const ejectArray: boolean[] = [];
+        curr.forEach((CTClass) => {
+          ejectArray.push(CTClass.pupils.length === 0);
+        });
+
+        if (
+          !ejectArray.includes(false) &&
+          currentCTClass?.pupils.length === 0
+        ) {
+          return curr;
+        }
+      }
+      if (curr && currentCTClass) {
+        const copyClasses = [...curr];
+        const masterList = copyClasses;
+        const updatedClasses = masterList.map((CTClass) => {
+          return CTClass.name === currentCTClass.name
+            ? currentCTClass
+            : CTClass;
+        });
+        return updatedClasses;
+      } else {
+        return null;
+      }
+    });
+  }, [currentCTClass]);
+
   async function submitHandler(values: z.infer<typeof formSchema>) {
     const { first_name, last_name_initials } = values;
-
-    const updatedClassList = await postPupil(
-      CTClassId,
-      first_name,
-      last_name_initials
-    );
-
-    setCurrentClass(updatedClassList);
+    if (currentTeacher?.id === "guest" && currentCTClass) {
+      addGuestPupil(
+        first_name,
+        last_name_initials,
+        currentCTClass,
+        setCurrentCTClass
+      );
+    } else {
+      const updatedClassList = await postPupil(
+        CTClassId,
+        first_name,
+        last_name_initials
+      );
+      setCurrentClass(updatedClassList);
+    }
     form.reset(defaultValues);
   }
 

@@ -8,29 +8,31 @@ import {
 import RemoveClassButton from "./RemoveClassButton";
 import ClassesList from "./ClassesList";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
-
-// interface Props {
-//   CTClasses: CTClass[] | null;
-// }
+import { guestAllClasses } from "@/app/(app)/guestData";
 
 export default function CTClassesSidebar() {
-  // const [allClasses, setAllClasses] = useState<CTClass[] | null>(null);
-  // const [currentClass, setCurrentClass] = useState<CTClass | null>(null);
   const { data: session } = useSession();
   const {
     currentCTClass,
     setCurrentCTClass,
     allCTClasses,
     setAllCTClasses,
+    currentTeacher,
     setCurrentTeacher,
   } = useContext(CTClassContext);
   useEffect(() => {
-    if (session?.user?.email)
+    if (session?.user?.email) {
       getAllClasses(session.user.email, setAllCTClasses);
+    }
+    if (currentTeacher?.id !== "guest") {
+      getTeacher(session?.user?.email!).then((teacher) => {
+        setCurrentTeacher(teacher);
+      });
+    }
 
-    getTeacher(session?.user?.email!).then((teacher) => {
-      setCurrentTeacher(teacher);
-    });
+    if (currentTeacher?.id === "guest" && !allCTClasses) {
+      setAllCTClasses(guestAllClasses);
+    }
   }, [session?.user, currentCTClass, setAllCTClasses]);
 
   return (

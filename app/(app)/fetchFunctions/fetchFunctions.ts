@@ -95,7 +95,7 @@ export async function updatePupil(
   });
 
   return updatedPupil.json().then((updatedPupil: Pupil) => {
-    return updatedPupil.CTClass;
+    return updatedPupil.CTClass as CTClass;
   });
 }
 

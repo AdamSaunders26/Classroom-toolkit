@@ -21,7 +21,9 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { detectPupils } from "@/app/(app)/utils/functions";
 import { postManyPupils } from "@/app/(app)/fetchFunctions/fetchFunctions";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
+import { pasteGuestPupils } from "@/app/(app)/utils/guestFunctions";
 
 const FormSchema = z.object({
   newPupils: z
@@ -45,6 +47,8 @@ export default function PastePupils({
   currentClass,
   setCurrentClass,
 }: Props) {
+  const { currentCTClass, setCurrentCTClass, currentTeacher } =
+    useContext(CTClassContext);
   const defaultValues = { newPupils: "" };
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -56,12 +60,15 @@ export default function PastePupils({
   }, [currentClass]);
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data.newPupils);
-    const updatedClass = await postManyPupils(
-      CTClassId,
-      detectPupils(data.newPupils)
-    );
-    setCurrentClass(updatedClass);
+    if (currentTeacher?.id === "guest" && currentCTClass) {
+      pasteGuestPupils(currentCTClass, data, setCurrentCTClass);
+    } else {
+      const updatedClass = await postManyPupils(
+        CTClassId,
+        detectPupils(data.newPupils)
+      );
+      setCurrentClass(updatedClass);
+    }
   }
 
   return (
