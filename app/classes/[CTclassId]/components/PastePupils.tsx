@@ -24,6 +24,8 @@ import { postManyPupils } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { useContext, useEffect } from "react";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
 import { pasteGuestPupils } from "@/app/(app)/utils/guestFunctions";
+import { useToast } from "@/components/ui/use-toast";
+import { RxCheckCircled } from "react-icons/rx";
 
 const FormSchema = z.object({
   newPupils: z
@@ -49,6 +51,8 @@ export default function PastePupils({
 }: Props) {
   const { currentCTClass, setCurrentCTClass, currentTeacher } =
     useContext(CTClassContext);
+  const { toast } = useToast();
+
   const defaultValues = { newPupils: "" };
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -68,6 +72,10 @@ export default function PastePupils({
         detectPupils(data.newPupils)
       );
       setCurrentClass(updatedClass);
+      toast({
+        title: "Pupils added successfully.",
+        action: <RxCheckCircled />,
+      });
     }
   }
 

@@ -4,6 +4,7 @@ import { Inter, Sarabun } from "next/font/google";
 import Header from "./(app)/appComponents/Header";
 import NextAuthProvider from "./(app)/NextAuthProvider";
 import { CTClassProvider } from "./(app)/context/CTClassProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 const sarabun = Sarabun({ subsets: ["latin"], weight: "500" });
@@ -30,6 +31,7 @@ export default function RootLayout({
           <CTClassProvider>
             <Header />
             {children}
+            <Toaster />
           </CTClassProvider>
         </NextAuthProvider>
       </body>
