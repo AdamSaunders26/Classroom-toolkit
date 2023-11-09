@@ -8,7 +8,7 @@ export default function LoadingSpinner() {
         priority
         className="h-32 w-32"
         src={CTLogo}
-        alt="Classroom Toolkit logo"
+        alt="An image spinning to indicate something is loading"
       />
     </div>
   );
