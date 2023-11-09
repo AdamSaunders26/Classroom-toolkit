@@ -21,6 +21,8 @@ export default function CTClassesSidebar() {
     setCurrentTeacher,
   } = useContext(CTClassContext);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     setCurrentCTClass(null);
   }, []);
@@ -28,6 +30,7 @@ export default function CTClassesSidebar() {
   useEffect(() => {
     if (session?.user?.email) {
       getAllClasses(session.user.email, setAllCTClasses);
+      // setIsLoading(false);
     }
     if (currentTeacher?.id !== "guest") {
       getTeacher(session?.user?.email!).then((teacher) => {
@@ -37,6 +40,7 @@ export default function CTClassesSidebar() {
 
     if (currentTeacher?.id === "guest" && !allCTClasses) {
       setAllCTClasses(guestAllClasses);
+      // setIsLoading(false);
     }
   }, [session?.user, currentCTClass, setAllCTClasses]);
 
@@ -47,6 +51,7 @@ export default function CTClassesSidebar() {
         <ClassesList
           allClasses={allCTClasses}
           setCurrentClass={setCurrentCTClass}
+          isLoading={isLoading}
         />
       </section>
       <div className="flex flex-col gap-2">

@@ -18,7 +18,7 @@ export default function LogInOutButton({ header }: Props) {
 
   const buttonClass = header
     ? "bg-ctblue hover:bg-ctblue-300"
-    : "rounded-md bg-ctyellow text-black hover:bg-ctyellow-300";
+    : "rounded-md bg-ctyellow text-black hover:bg-ctyellow-400";
 
   if (currentTeacher?.id === "guest" && header) {
     return guestSignOut(buttonClass, setCurrentTeacher, router);
