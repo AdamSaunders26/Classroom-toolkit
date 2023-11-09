@@ -10,7 +10,12 @@ import ClassesList from "./ClassesList";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
 import { guestAllClasses } from "@/app/(app)/guestData";
 
-export default function CTClassesSidebar() {
+interface Props {
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function CTClassesSidebar({ isLoading, setIsLoading }: Props) {
   const { data: session } = useSession();
   const {
     currentCTClass,
@@ -20,8 +25,6 @@ export default function CTClassesSidebar() {
     currentTeacher,
     setCurrentTeacher,
   } = useContext(CTClassContext);
-
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setCurrentCTClass(null);
