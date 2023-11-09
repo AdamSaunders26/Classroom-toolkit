@@ -30,7 +30,7 @@ export default function CTClassesSidebar() {
   useEffect(() => {
     if (session?.user?.email) {
       getAllClasses(session.user.email, setAllCTClasses);
-      // setIsLoading(false);
+      setIsLoading(false);
     }
     if (currentTeacher?.id !== "guest") {
       getTeacher(session?.user?.email!).then((teacher) => {
@@ -40,7 +40,7 @@ export default function CTClassesSidebar() {
 
     if (currentTeacher?.id === "guest" && !allCTClasses) {
       setAllCTClasses(guestAllClasses);
-      // setIsLoading(false);
+      setIsLoading(false);
     }
   }, [session?.user, currentCTClass, setAllCTClasses]);
 

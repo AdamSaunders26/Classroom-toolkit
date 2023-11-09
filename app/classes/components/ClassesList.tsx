@@ -11,16 +11,15 @@ export default function ClassesList({
   allClasses,
   setCurrentClass,
   isLoading,
-}) {
-  if (!allClasses) {
+}: Props) {
+  if (allClasses && allClasses.length === 0) {
     return <section>No classes found</section>;
   }
-  console.log(isLoading);
+
   return (
     <div className="flex flex-col  overflow-y-scroll scroll-smooth overflow-x-hidden p-2 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-ctyellow items-center ">
-      {isLoading
-        ? ClassNameCardSkeleton()
-        : allClasses.map((CTClass: CTClass) => {
+      {!isLoading && allClasses
+        ? allClasses.map((CTClass: CTClass) => {
             return (
               <ClassNameCard
                 key={CTClass.id}
@@ -28,7 +27,8 @@ export default function ClassesList({
                 setCurrentClass={setCurrentClass}
               />
             );
-          })}
+          })
+        : ClassNameCardSkeleton()}
     </div>
   );
 }
