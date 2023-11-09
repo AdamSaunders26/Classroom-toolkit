@@ -1,14 +1,14 @@
 import Image from "next/image";
 import CTLogo from "../../icon.svg";
 
-export default function LoadingSpinner() {
+export default function LoadingSpinner(h = 8, w = 8) {
   return (
     <div className="text-xl p-4 place-self-center col-span-4 animate-spin-slow">
       <Image
         priority
         className="h-32 w-32"
         src={CTLogo}
-        alt="Classroom Toolkit logo"
+        alt="An image spinning to indicate something is loading"
       />
     </div>
   );
