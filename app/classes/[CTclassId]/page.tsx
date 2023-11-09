@@ -17,10 +17,8 @@ export default function CTClassPage({ params }: Props) {
   const [currentPupil, setCurrentPupil] = useState<Pupil | null>(null);
 
   useEffect(() => {
-    if (currentTeacher?.id === "guest" && allCTClasses) {
+    if (allCTClasses) {
       getSingleGuestClass(allCTClasses, params, setCurrentCTClass);
-    } else {
-      getSingleClass(params.CTclassId, setCurrentCTClass);
     }
   }, [params.CTclassId, setCurrentCTClass]);
 

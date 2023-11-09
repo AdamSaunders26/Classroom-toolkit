@@ -3,6 +3,7 @@ import PupilListItem from "./PupilListItem";
 import { useSession } from "next-auth/react";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
 import { sortGuestClass } from "@/app/(app)/utils/guestFunctions";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
   CTclass: CTClass | null;

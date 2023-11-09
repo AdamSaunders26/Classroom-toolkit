@@ -10,7 +10,12 @@ import ClassesList from "./ClassesList";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
 import { guestAllClasses } from "@/app/(app)/guestData";
 
-export default function CTClassesSidebar() {
+interface Props {
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function CTClassesSidebar({ isLoading, setIsLoading }: Props) {
   const { data: session } = useSession();
   const {
     currentCTClass,
@@ -28,6 +33,7 @@ export default function CTClassesSidebar() {
   useEffect(() => {
     if (session?.user?.email) {
       getAllClasses(session.user.email, setAllCTClasses);
+      setIsLoading(false);
     }
     if (currentTeacher?.id !== "guest") {
       getTeacher(session?.user?.email!).then((teacher) => {
@@ -37,6 +43,7 @@ export default function CTClassesSidebar() {
 
     if (currentTeacher?.id === "guest" && !allCTClasses) {
       setAllCTClasses(guestAllClasses);
+      setIsLoading(false);
     }
   }, [session?.user, currentCTClass, setAllCTClasses]);
 
@@ -47,6 +54,7 @@ export default function CTClassesSidebar() {
         <ClassesList
           allClasses={allCTClasses}
           setCurrentClass={setCurrentCTClass}
+          isLoading={isLoading}
         />
       </section>
       <div className="flex flex-col gap-2">
