@@ -13,9 +13,13 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import CTLogo from "../../icon.svg";
+import { useToast } from "@/components/ui/use-toast";
+import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
+import { deleteGuestClass } from "@/app/(app)/utils/guestFunctions";
+
 interface Props {
   currentClass: CTClass | null;
   setCurrentClass: React.Dispatch<React.SetStateAction<CTClass | null>>;
@@ -28,7 +32,10 @@ export default function RemoveClassButton({
   setAllClasses,
 }: Props) {
   const { data: session } = useSession();
+  const { currentTeacher, setAllCTClasses, allCTClasses } =
+    useContext(CTClassContext);
   const router = useRouter();
+  const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -39,19 +46,26 @@ and all the students in it.`;
 
   function deleteCurrentClass() {
     if (currentClass) {
-      deleteClass(currentClass?.id).then((deletedClass: CTClass) => {
-        setCurrentClass(null);
-        setAllClasses((curr) => {
-          if (curr) {
-            const updatedClassList = curr?.filter((CTclass) => {
-              return CTclass.id !== deletedClass.id;
-            });
-            return updatedClassList;
-          } else {
-            return null;
-          }
+      if (currentTeacher?.id === "guest") {
+        deleteGuestClass(currentClass.id, setAllCTClasses);
+      } else {
+        deleteClass(currentClass?.id).then((deletedClass: CTClass) => {
+          setCurrentClass(null);
+          setAllClasses((curr) => {
+            if (curr) {
+              const updatedClassList = curr?.filter((CTclass) => {
+                return CTclass.id !== deletedClass.id;
+              });
+              return updatedClassList;
+            } else {
+              return null;
+            }
+          });
         });
-      });
+      }
+      setIsDeleting(false);
+      setOpen(false);
+      toast({ title: "Class deleted successfully" });
       router.push(process.env.NEXT_PUBLIC_HOME_URL + "/classes");
     }
   }
@@ -74,14 +88,14 @@ and all the students in it.`;
           </AlertDialogTitle>
           <AlertDialogDescription>
             {isDeleting ? (
-              <div className="flex justify-center">
+              <span className="flex justify-center">
                 <Image
                   priority
                   className="h-16 w-16 animate-spin-slow "
                   src={CTLogo}
                   alt="An image spinning to indicate something is loading"
                 />
-              </div>
+              </span>
             ) : (
               alertMessage
             )}

@@ -20,10 +20,11 @@ import {
   postClass,
   postPupil,
 } from "@/app/(app)/fetchFunctions/fetchFunctions";
-import { RxPlus } from "react-icons/rx";
+import { RxCheckCircled, RxPlus } from "react-icons/rx";
 import { useContext, useEffect } from "react";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
 import { addGuestPupil } from "@/app/(app)/utils/guestFunctions";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   first_name: z.string().min(1, "Required").max(30, {
@@ -48,6 +49,8 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
     allCTClasses,
     currentTeacher,
   } = useContext(CTClassContext);
+  const { toast } = useToast();
+
   const defaultValues = {
     first_name: "",
     last_name_initials: "",
@@ -104,6 +107,10 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
       );
       setCurrentClass(updatedClassList);
     }
+    toast({
+      title: "Pupil added successfully.",
+      action: <RxCheckCircled />,
+    });
     form.reset(defaultValues);
   }
 

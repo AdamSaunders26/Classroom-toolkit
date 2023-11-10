@@ -17,6 +17,7 @@ import {
 import CTLogo from "../../../icon.svg";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Image from "next/image";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
   currentPupil: Pupil | null;
@@ -27,6 +28,8 @@ export default function RemovePupilButton({
   currentPupil,
   setCurrentClass,
 }: Props) {
+  const { toast } = useToast();
+
   const { currentTeacher } = useContext(CTClassContext);
   const [open, setOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -45,10 +48,11 @@ export default function RemovePupilButton({
       } else {
         deletePupil(currentPupil.id).then((updatedClass) => {
           setCurrentClass(updatedClass);
-          setOpen(false);
-          setIsDeleting(false);
         });
       }
+      setOpen(false);
+      setIsDeleting(false);
+      toast({ title: "Pupil deleted successfully" });
     }
   }
   if (!currentPupil) {

@@ -20,6 +20,7 @@ import YearGroupSelect from "./YearGroupSelect";
 import { postClass } from "@/app/(app)/fetchFunctions/fetchFunctions";
 import { CTClassContext } from "@/app/(app)/context/CTClassProvider";
 import { addGuestClass } from "@/app/(app)/utils/guestFunctions";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1, "Required").max(20, {
@@ -38,6 +39,8 @@ export default function AddClassForm({ setAllClasses }: Props) {
   const { data: session } = useSession();
   const { currentTeacher, setAllCTClasses, allCTClasses } =
     useContext(CTClassContext);
+  const { toast } = useToast();
+
   const defaultValues = {
     name: "",
     yearGroup: "",
@@ -57,9 +60,13 @@ export default function AddClassForm({ setAllClasses }: Props) {
       );
 
       setAllClasses(updatedClassList);
+
+      toast({ title: "Class added successfully." });
       form.reset(defaultValues);
     } else if (currentTeacher?.id === "guest") {
       addGuestClass(name, yearGroup, setAllCTClasses);
+      toast({ title: "Class added successfully." });
+      form.reset(defaultValues);
     }
   }
 

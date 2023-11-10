@@ -167,3 +167,18 @@ export function addGuestClass(
     }
   });
 }
+
+export function deleteGuestClass(
+  id: number,
+  setAllCTClasses: React.Dispatch<React.SetStateAction<CTClass[] | null>>
+) {
+  setAllCTClasses((curr) => {
+    if (curr) {
+      return curr.filter((CTClass) => {
+        return CTClass.id !== id;
+      });
+    } else {
+      return null;
+    }
+  });
+}
