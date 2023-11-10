@@ -65,6 +65,8 @@ export default function AddClassForm({ setAllClasses }: Props) {
       form.reset(defaultValues);
     } else if (currentTeacher?.id === "guest") {
       addGuestClass(name, yearGroup, setAllCTClasses);
+      toast({ title: "Class added successfully." });
+      form.reset(defaultValues);
     }
   }
 

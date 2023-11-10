@@ -106,11 +106,11 @@ export default function AddPupilForm({ setCurrentClass, CTClassId }: Props) {
         last_name_initials
       );
       setCurrentClass(updatedClassList);
-      toast({
-        title: "Pupil added successfully.",
-        action: <RxCheckCircled />,
-      });
     }
+    toast({
+      title: "Pupil added successfully.",
+      action: <RxCheckCircled />,
+    });
     form.reset(defaultValues);
   }
 
