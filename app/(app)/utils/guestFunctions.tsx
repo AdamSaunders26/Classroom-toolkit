@@ -174,7 +174,6 @@ export function deleteGuestClass(
 ) {
   setAllCTClasses((curr) => {
     if (curr) {
-      console.log(curr);
       return curr.filter((CTClass) => {
         return CTClass.id !== id;
       });
