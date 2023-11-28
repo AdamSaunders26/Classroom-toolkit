@@ -12,16 +12,8 @@ import { guestAllClasses } from "../(app)/guestData";
 
 export default function TrackerPage() {
   const demoTrackerArray = [0, 1, 2, 3, 4];
-  const {
-    currentCTClass,
-    setCurrentCTClass,
-    currentTeacher,
-    setCurrentTeacher,
-    allCTClasses,
-    setAllCTClasses,
-  } = useContext(CTClassContext);
-  console.log(allCTClasses);
-  console.log(currentTeacher);
+  const { currentTeacher, setCurrentTeacher, allCTClasses, setAllCTClasses } =
+    useContext(CTClassContext);
   const { data: session } = useSession();
   useEffect(() => {
     if (session?.user?.email) {
