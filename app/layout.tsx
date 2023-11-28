@@ -24,7 +24,7 @@ export default function RootLayout({
       <body
         className={
           sarabun.className +
-          " bg-neutral-100 h-screen  flex flex-col overflow-hidden "
+          " bg-neutral-100 h-[100dvh]  flex flex-col overflow-hidden "
         }
       >
         <NextAuthProvider>

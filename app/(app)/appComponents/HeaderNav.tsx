@@ -19,7 +19,7 @@ export default function HeaderNav() {
     <NavigationMenu className=" ">
       <NavigationMenuList className="gap-4">
         <HeaderNavItem href="/classes" text="Classes" />
-        <HeaderNavItem href="/" text="Link 1" />
+        <HeaderNavItem href="/trackers" text="Trackers" />
         <HeaderNavItem href="/" text="Link 2" />
       </NavigationMenuList>
     </NavigationMenu>
